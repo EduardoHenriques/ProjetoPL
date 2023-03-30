@@ -1,5 +1,6 @@
 
-## Projeto da UC de Processamento de Linguagens [22-23] \n Universidade do Minho - Licenciatura em Engenharia Informática
+## Projeto da UC de Processamento de Linguagens [22-23] 
+Universidade do Minho - Licenciatura em Engenharia Informática
 
 ### Grupo 
 
