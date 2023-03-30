@@ -4,7 +4,7 @@
 
 ### Grupo 
 
-Grupo nº 
+Grupo nº _ :
 
   -Membros:
     -Eduardo Fernando Cruz Henriques [A93186]
