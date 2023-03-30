@@ -12,3 +12,6 @@ Grupo nº _
   - José dos Santos Mendes [A98974]
   - Pedro Marcelo Bogas Oliveira [A95076]
 
+### Enunciado escolhido
+
+Enunciado nº _ : _
