@@ -14,4 +14,4 @@ Grupo nº 29
 
 ### Enunciado escolhido
 
-Enunciado nº _ : _
+Enunciado nº 2.7 : Conversor de GEDCOM
