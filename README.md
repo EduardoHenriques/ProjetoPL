@@ -4,7 +4,7 @@
 
 ### Grupo 
 
-Grupo nº _ :
+Grupo nº _ 
 
   Membros:
   
