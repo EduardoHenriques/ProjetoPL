@@ -6,7 +6,9 @@
 
 Grupo nº _ :
 
-  Em relação ao website da Universidade do Minho 1998:
+  Membros:
   
-  - Reconhecemos os seguintes padrões na categoria Navigation:
+  - Eduardo Fernando Cruz Henriques [A93196]
+  - José dos Santos Mendes [A98974]
+  - Pedro Marcelo Bogas Oliveira [A95076]
 
