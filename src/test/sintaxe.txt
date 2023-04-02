@@ -1,0 +1,39 @@
+
+
+
+<genoa>
+    <pessoa>
+        <id>I1</id>
+        <nome>Victoria Hanover</nome>
+        <título>Queen of England</título>
+        <sexo>F</sexo>
+        <Nascimento>
+            <data>1819-05-24</data>
+            <local>Kensington,Palace,London,England<\local>
+        </Nascimento>
+        <Obito>
+            <data>1901-01-22</data>
+        </Obito>
+        <pai>I133</pai>             
+        <mae>I138</mae>             
+    </pessoa>
+    ...
+</genoa>
+
+
+0 @I1@ INDI
+1 NAME Victoria  /Hanover/
+1 TITL Queen of England
+1 SEX F
+1 BIRT
+2 DATE 24 MAY 1819
+2 PLAC Kensington,Palace,London,England
+1 DEAT
+2 DATE 22 JAN 1901
+2 PLAC Osborne House,Isle of Wight,England
+1 BURI
+2 PLAC Royal Mausoleum,Frogmore,Berkshire,England
+1 REFN 1                
+1 FAMS @F1@             
+1 FAMC @F42@            
+
