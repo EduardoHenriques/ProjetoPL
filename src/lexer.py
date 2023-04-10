@@ -1,13 +1,18 @@
 import ply.lex as lex
 import re
+import json
 
-level = 0
-comm_level = 0
-indi_level = 0
-birth_level = 0
-death_level = 0
-burial_level = 0
-marriage_level = 0
+level = 0  # nivel
+comm_level = 0  #
+indi_level = 0  #
+birth_level = 0  #
+death_level = 0  #
+burial_level = 0  #
+marriage_level = 0  #
+
+name = ""  # nome da pessoa
+pointer = ""  # pointer para uma pessoa
+dic = dict()  # dicionario que associa o pointer ao nome da pessoa
 
 
 def t_error(t):
@@ -22,6 +27,7 @@ def lexer_gen():
 		("burial", "inclusive"),
 		("marriage", "inclusive"),
 		("individual", "inclusive"),
+		("family", "inclusive")
 	]
 
 	tokens = [
@@ -73,8 +79,6 @@ def lexer_gen():
 
 	t_ID = r"^\d+" + r"\s*" + t_POINTER + r"\s*(?=INDI)"
 
-	t_NAME = r"(?<=NAME).+"
-
 	t_COMM = r"COMM"
 	t_CONT = r"CONT"
 
@@ -89,20 +93,33 @@ def lexer_gen():
 
 	t_PLACE = r"(?<=PLAC).+"
 
-	# FUNCOES PARA ESTADOS
-
+	# o nivel é atualizado em cada linha lida
 	def t_LEVEL(t):
 		r"""^(\d+)"""
 		global level
 		level = int(t.value)
 		return t
 
-	# individuo
+	# individuo é guardado num dicionario de acordo c/ o pointer correspondente
+	def t_individual_NAME(t):
+		r"""(?<=NAME).+"""
+		global name, dic
+		name = t.value
+		dic[pointer] = name
+
+	#									#
+	#		 FUNCOES PARA ESTADOS		#
+	#									#
+
+	# pessoa
 	def t_OpenIndividual(t):
 		r"""\s*\@\w+[^@]?\@\s*(?=INDI)"""
-		global indi_level, level
+		print("+1")
+		global indi_level, level, pointer
 		indi_level = level
 		t.lexer.push_state("individual")
+		pointer = re.sub(r"\s*", "", t.value)
+		print(pointer)
 
 	def t_individual_CloseIndividual(t):
 		r"""^\d+"""
@@ -110,11 +127,30 @@ def lexer_gen():
 		level = int(t.value)
 		if indi_level >= level:
 			t.lexer.pop_state()
-			print("---")
+			print("-1")
+
+	# familia
+	def t_OpenFamily(t):
+		r"""\s*\@\w+[^@]?\@\s*(?=FAM)"""
+		print("+1")
+		global indi_level, level, pointer
+		indi_level = level
+		t.lexer.push_state("family")
+		pointer = re.sub(r"\s*", "", t.value)
+		print(pointer)
+
+	def t_family_CloseFamily(t):
+		r"""^\d+"""
+		global level, indi_level
+		level = int(t.value)
+		if indi_level >= level:
+			t.lexer.pop_state()
+			print("-1")
 
 	# comentario
 	def t_OpenComm(t):
 		r"""COMM"""
+		print("+1")
 		global comm_level, level
 		comm_level = level
 		t.lexer.push_state("comm")
@@ -125,10 +161,12 @@ def lexer_gen():
 		level = int(t.value)
 		if comm_level >= level:
 			t.lexer.pop_state()
+			print("-1")
 
-	# birth
+	# nascimento
 	def t_OpenBirth(t):
 		r"""BIRT"""
+		print("+1")
 		global birth_level
 		birth_level = level
 		t.lexer.push_state("birth")
@@ -139,10 +177,12 @@ def lexer_gen():
 		level = int(t.value)
 		if birth_level >= level:
 			t.lexer.pop_state()
+			print("-1")
 
-	# death
+	# morte
 	def t_OpenDeath(t):
 		r"""DEAT"""
+		print("+1")
 		global death_level
 		death_level = level
 		t.lexer.push_state("death")
@@ -153,10 +193,12 @@ def lexer_gen():
 		level = int(t.value)
 		if death_level >= level:
 			t.lexer.pop_state()
+			print("-1")
 
-	# burial
+	# enterro
 	def t_OpenBurial(t):
 		r"""BURI"""
+		print("+1")
 		global burial_level
 		burial_level = level
 		t.lexer.push_state("burial")
@@ -168,9 +210,10 @@ def lexer_gen():
 		if burial_level >= level:
 			t.lexer.pop_state()
 
-	# marriage
+	# casamento
 	def t_OpenMarriage(t):
 		r"""MARR"""
+		print("+1")
 		global marriage_level
 		marriage_level = level
 		t.lexer.push_state("marriage")
@@ -181,6 +224,7 @@ def lexer_gen():
 		level = int(t.value)
 		if marriage_level >= level:
 			t.lexer.pop_state()
+			print("-1")
 
 	return lex.lex()
 
@@ -188,8 +232,10 @@ def lexer_gen():
 if __name__ == "__main__":
 	lexer = lexer_gen()
 	with open("test/teste.txt", "r") as file:
-		linhas = file.readlines(6000)
+		linhas = file.readlines()
 		for line in linhas:
 			lexer.input(line)
 			for token in lexer:
-				print(f"TIPO: {token.type:<10} | VALOR: {token.value:<50} | ESTADO: {lexer.current_state():<10} (NIVEL {level})")
+				print(
+					f"TIPO: {token.type:<10} | VALOR: {token.value:<50} | ESTADO: {lexer.current_state():<10} (NIVEL {level})")
+		# print(json.dumps(dic, indent=2))
