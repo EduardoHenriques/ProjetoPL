@@ -114,7 +114,6 @@ def lexer_gen():
 	# pessoa
 	def t_OpenIndividual(t):
 		r"""\s*\@\w+[^@]?\@\s*(?=INDI)"""
-		print("+1")
 		global indi_level, level, pointer
 		indi_level = level
 		t.lexer.push_state("individual")
@@ -127,12 +126,10 @@ def lexer_gen():
 		level = int(t.value)
 		if indi_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	# familia
 	def t_OpenFamily(t):
 		r"""\s*\@\w+[^@]?\@\s*(?=FAM)"""
-		print("+1")
 		global indi_level, level, pointer
 		indi_level = level
 		t.lexer.push_state("family")
@@ -145,12 +142,10 @@ def lexer_gen():
 		level = int(t.value)
 		if indi_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	# comentario
 	def t_OpenComm(t):
 		r"""COMM"""
-		print("+1")
 		global comm_level, level
 		comm_level = level
 		t.lexer.push_state("comm")
@@ -161,12 +156,10 @@ def lexer_gen():
 		level = int(t.value)
 		if comm_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	# nascimento
 	def t_OpenBirth(t):
 		r"""BIRT"""
-		print("+1")
 		global birth_level
 		birth_level = level
 		t.lexer.push_state("birth")
@@ -177,12 +170,10 @@ def lexer_gen():
 		level = int(t.value)
 		if birth_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	# morte
 	def t_OpenDeath(t):
 		r"""DEAT"""
-		print("+1")
 		global death_level
 		death_level = level
 		t.lexer.push_state("death")
@@ -193,12 +184,10 @@ def lexer_gen():
 		level = int(t.value)
 		if death_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	# enterro
 	def t_OpenBurial(t):
 		r"""BURI"""
-		print("+1")
 		global burial_level
 		burial_level = level
 		t.lexer.push_state("burial")
@@ -213,7 +202,6 @@ def lexer_gen():
 	# casamento
 	def t_OpenMarriage(t):
 		r"""MARR"""
-		print("+1")
 		global marriage_level
 		marriage_level = level
 		t.lexer.push_state("marriage")
@@ -224,7 +212,6 @@ def lexer_gen():
 		level = int(t.value)
 		if marriage_level >= level:
 			t.lexer.pop_state()
-			print("-1")
 
 	return lex.lex()
 
