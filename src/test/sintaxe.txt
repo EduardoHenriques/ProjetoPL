@@ -37,3 +37,52 @@
 1 FAMS @F1@             
 1 FAMC @F42@            
 
+
+GIC:
+
+    gedcom = divList
+    divList = divList div                                 # dividir o ficheiro em seccoes
+             | div
+
+    div = headFamily familyLineList 0                     # dividir as seccoes em cabeça e cauda
+         | headPerson personLineList 0
+
+
+    headPerson = LEVEL POINTER INDI                       # iterar pela cauda da pessoa
+    personLineList = personLineList LEVEL personLine
+                     |
+
+    personLine =    subtypeTag
+                  | typeTag
+                  | POINTER pointerTag
+
+
+    headFamily = LEVEL POINTER FAM                       # iterar pela cauda da pessoa
+    familyLineList = familyLineList LEVEL familyLine
+                     |
+
+    familyLine = familyTag POINTER
+                | typeTag
+                | subtypeTag
+
+
+    subTypeTag =  BIRT
+                | DEAT
+                | BURI
+                | MARR
+                | ...
+
+    typeTag =   NAME
+              | sex
+              | div
+              |
+              | ...
+
+    sex =   SEX 'M'
+          | SEX 'F'
+
+    div =   DIV 'Y'
+          | DIV 'N'
+
+
+
