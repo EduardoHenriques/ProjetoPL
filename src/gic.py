@@ -5,10 +5,14 @@ from lexer import tokens
 
 def p_grammar(p):
 	"""
-	gedcom      : header info
-	header 		: HEAD headerCont
-	            |
-	headerCont  :
+	gedcom       : headerLevels content
+	
+	headerLevels : headerLevels headerCont
+	             | headerCont
+	             
+	headerCont  : LEVEL headerAttr
+	headerAttr  : DEST | CHAR | FILE | SOUR
+	
 	referencia  : TIPOreg '{' PAL ',' campos '}'
 	campos      : campos ',' campo
 	campos      : campo
@@ -25,20 +29,8 @@ def p_error(p):
 	print("Syntax error in input!", p)
 	parser.success = False
 
+def p_gedcom
 
 parser = yacc.yacc()
 parser.success = True
 
-source = ""
-# for linha in sys.stdin:
-#	source += linha
-f = open("bibtex.txt", encoding="utf-8")
-for linha in f:
-	source += linha
-
-parser.parse(source)
-# print(source)
-if parser.success:
-	print('Parsing completed!')
-else:
-	print('Parsing failed!')

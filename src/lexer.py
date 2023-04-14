@@ -35,12 +35,14 @@ tokens = [
 	"DEST",  #
 	"FILE",
 	"CHAR",
+	"ADDR",
 
 	"COMM",
 	"CONT",
 
 	"ADDRESS",
 	"PHONE",
+	"NAME",
 
 	"TITLE",
 	"ID",
@@ -75,7 +77,15 @@ t_POINTER = r"\@\w+[^@]?\@"
 t_ID = r"^\d+" + r"\s*" + t_POINTER + r"\s*(?=INDI)"
 
 t_COMM = r"COMM"
-t_CONT = r"(?<=CONT).*"
+t_HEADER = r"\sHEAD"
+t_CONT = r"(?<=CONT)\s*.+"
+t_DEST = r"(?<=DEST)\s*.+"
+t_FILE = r"(?<=FILE)\s*.+"
+t_CHAR = r"(?<=CHAR)\s*.+"
+t_ADDR = r"(?<=ADDR)\s*.+"
+t_NAME = r"(?<=NAME)\s*.+"
+t_SOUR = r"(?<=SOUR).*"
+t_PHONE = r"(?<=PHON)\s*.+"
 
 t_DATE = r"(?<=DATE).+"
 t_ALIAS = r'(?<=ALIAS).+'
@@ -85,7 +95,7 @@ t_BIRTH = "BIRT"
 t_DEATH = "DEAT"
 t_BURIAL = r"BURI"
 t_MAR = r"MARR"
-t_TITLE = r"(?<=TITL)\s*.*"
+t_TITLE = r"(?<=TITL)\s*.+"
 t_PLACE = r"(?<=PLAC)\s*.+"
 t_FAMS = r'(?<=FAMS).*'
 t_FAMC = r'(?<=FAMC).*'
@@ -93,7 +103,6 @@ t_CHILD = r'(?<=CHILD).*'
 t_HUSBAND = r'(?<=HUSBAND).*'
 t_WIFE = r'(?<=WIFE).*'
 t_DIV = r'(?<=DIV)[T|F]'
-t_HEADER = r'\sHEAD'
 
 
 # o nivel é atualizado em cada linha lida
@@ -239,7 +248,7 @@ lexer = lex.lex()
 if __name__ == "__main__":
 
 	with open("test/teste.txt", "r") as file:
-		linhas = file.readlines(100)
+		linhas = file.readlines(3000)
 		for line in linhas:
 			lexer.input(line)
 			for token in lexer:
