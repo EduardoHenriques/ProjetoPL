@@ -15,6 +15,7 @@ def t_error(t):
 	t.lexer.skip(1)
 
 
+'''
 states = [
 	("comm", "inclusive"),
 	("birth", "inclusive"),
@@ -24,7 +25,7 @@ states = [
 	("individual", "inclusive"),
 	("family", "inclusive")
 ]
-
+'''
 tokens = [
 	"BARRA",
 
@@ -46,7 +47,6 @@ tokens = [
 
 	"TITLE",
 	"ID",
-	"NAME",
 	"ALIAS",
 	"SEX",
 	"DATE",
@@ -65,10 +65,12 @@ tokens = [
 	"HUSBAND",
 	"WIFE",
 	"DIV",  # divorcio(opcional, T/F)
+	"CONTENT"
 
 ]
 
 # expressoes tokens
+
 
 t_ignore = r"\t\s\n"
 
@@ -78,41 +80,45 @@ t_ID = r"^\d+" + r"\s*" + t_POINTER + r"\s*(?=INDI)"
 
 t_COMM = r"COMM"
 t_HEADER = r"\sHEAD"
-t_CONT = r"(?<=CONT)\s*.+"
-t_DEST = r"(?<=DEST)\s*.+"
-t_FILE = r"(?<=FILE)\s*.+"
-t_CHAR = r"(?<=CHAR)\s*.+"
-t_ADDR = r"(?<=ADDR)\s*.+"
-t_NAME = r"(?<=NAME)\s*.+"
-t_SOUR = r"(?<=SOUR).*"
-t_PHONE = r"(?<=PHON)\s*.+"
+t_CONT = r"CONT"
+t_DEST = r"DEST"
+t_FILE = r"FILE"
+t_CHAR = r"CHAR"
+t_ADDR = r"ADDR"
+t_NAME = r"NAME"
+t_SOUR = r"SOUR"
+t_PHONE = r"PHON"
 
-t_DATE = r"(?<=DATE).+"
-t_ALIAS = r'(?<=ALIAS).+'
-t_SEX = r"(?<=SEX)\s*[MF]"
+
+t_DATE = r"DATE"
+t_ALIAS = r'ALIAS'
+t_SEX = r"SEX"
+
 
 t_BIRTH = "BIRT"
 t_DEATH = "DEAT"
 t_BURIAL = r"BURI"
 t_MAR = r"MARR"
-t_TITLE = r"(?<=TITL)\s*.+"
-t_PLACE = r"(?<=PLAC)\s*.+"
-t_FAMS = r'(?<=FAMS).*'
-t_FAMC = r'(?<=FAMC).*'
-t_CHILD = r'(?<=CHILD).*'
-t_HUSBAND = r'(?<=HUSBAND).*'
-t_WIFE = r'(?<=WIFE).*'
-t_DIV = r'(?<=DIV)[T|F]'
+t_TITLE = r"TITL"
+t_PLACE = r"PLAC"
+t_FAMS = r'FAMS'
+t_FAMC = r'FAMC'
+t_CHILD = r'CHILD'
+t_HUSBAND = r'HUSBAND'
+t_WIFE = r'WIFE'
+t_DIV = r'DIV'
 
 
-# o nivel é atualizado em cada linha lida
 def t_LEVEL(t):
-	r"""^(\d+)"""
-	global level
-	level = int(t.value)
+	r"""\d"""
 	return t
 
 
+def t_CONTENT(t):
+	r'(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI)[^\n]+'
+	return t
+
+'''
 # individuo é guardado num dicionario de acordo c/ o pointer correspondente
 def t_individual_NAME(t):
 	r"""(?<=NAME).+"""
@@ -241,17 +247,13 @@ def t_marriage_CloseMarriage(t):
 	level = int(t.value)
 	if comm_level >= level:
 		t.lexer.pop_state()
-
+'''
 
 lexer = lex.lex()
 
 if __name__ == "__main__":
 
-	with open("test/teste.txt", "r") as file:
-		linhas = file.readlines(3000)
-		for line in linhas:
-			lexer.input(line)
-			for token in lexer:
-				print(
-					f"{token.type:<10} | {token.value:<50}")
-# print(json.dumps(dic, indent=2))
+	lexer.input("1 NAME Victoria  /Hanover/")
+	for token in lexer:
+		print(
+			f"{token.type:<10} | {token.value:<50}")
