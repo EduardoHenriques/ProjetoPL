@@ -65,7 +65,11 @@ tokens = [
 	"HUSBAND",
 	"WIFE",
 	"DIV",  # divorcio(opcional, T/F)
-	"CONTENT"
+	"CONTENT",
+
+	"FAM",
+	"INDI",
+	"CHR"
 
 ]
 
@@ -75,8 +79,8 @@ tokens = [
 t_ignore = r"\t\s\n"
 
 t_POINTER = r"\@\w+[^@]?\@"
-
-t_ID = r"^\d+" + r"\s*" + t_POINTER + r"\s*(?=INDI)"
+t_INDI = r"INDI"
+t_REFN = r"REFN"
 
 t_COMM = r"COMM"
 t_HEADER = r"\sHEAD"
@@ -93,7 +97,7 @@ t_PHONE = r"PHON"
 t_DATE = r"DATE"
 t_ALIAS = r'ALIAS'
 t_SEX = r"SEX"
-
+t_CHR = r"CHR"
 
 t_BIRTH = "BIRT"
 t_DEATH = "DEAT"
@@ -101,10 +105,13 @@ t_BURIAL = r"BURI"
 t_MAR = r"MARR"
 t_TITLE = r"TITL"
 t_PLACE = r"PLAC"
+
 t_FAMS = r'FAMS'
+t_FAM = r'FAM'
 t_FAMC = r'FAMC'
-t_CHILD = r'CHILD'
-t_HUSBAND = r'HUSBAND'
+
+t_CHILD = r'CHIL'
+t_HUSBAND = r'HUSB'
 t_WIFE = r'WIFE'
 t_DIV = r'DIV'
 
@@ -115,8 +122,9 @@ def t_LEVEL(t):
 
 
 def t_CONTENT(t):
-	r'(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI)[^\n]+'
+	r"""(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI|REFN|FAMS|FAMC|WIFE|HUSB|CHIL)[^\n]+"""
 	return t
+
 
 '''
 # individuo é guardado num dicionario de acordo c/ o pointer correspondente
