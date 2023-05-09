@@ -10,7 +10,6 @@ Grupo nº 29
   
   - Eduardo Fernando Cruz Henriques [A93196]
   - José dos Santos Mendes [A92974]
-  - Pedro Marcelo Bogas Oliveira [A95076]
 
 ### Enunciado escolhido
 
