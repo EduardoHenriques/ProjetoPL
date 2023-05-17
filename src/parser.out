@@ -10,11 +10,9 @@ Unused terminals:
     COMM
     CONT
     DEST
-    DIV
     FILE
     HEADER
     ID
-    MAR
     PHONE
     SOUR
 
@@ -28,15 +26,15 @@ Rule 4     person -> LEVEL POINTER INDI conteudo BEGIN
 Rule 5     conteudo -> conteudo LEVEL restPerson
 Rule 6     conteudo -> LEVEL restPerson
 Rule 7     restPerson -> singTag CONTENT
-Rule 8     families -> families family
-Rule 9     families -> family
-Rule 10    family -> LEVEL POINTER FAM conteudoF BEGIN
-Rule 11    family -> LEVEL POINTER FAM conteudoF
+Rule 8     restPerson -> multTag
+Rule 9     families -> families family
+Rule 10    families -> family
+Rule 11    family -> LEVEL POINTER FAM conteudoF BEGIN
 Rule 12    conteudoF -> conteudoF LEVEL restFams
 Rule 13    conteudoF -> LEVEL restFams
 Rule 14    restFams -> singTag CONTENT
-Rule 15    end -> LEVEL TRLR
-Rule 16    restPerson -> multTag
+Rule 15    restFams -> multTag
+Rule 16    end -> LEVEL TRLR
 Rule 17    singTag -> BURIAL
 Rule 18    singTag -> NAME
 Rule 19    singTag -> TITLE
@@ -50,9 +48,11 @@ Rule 26    multTag -> BIRTH
 Rule 27    multTag -> DEATH
 Rule 28    multTag -> CHR
 Rule 29    multTag -> BURIAL
-Rule 30    singTag -> WIFE
-Rule 31    singTag -> HUSBAND
-Rule 32    singTag -> CHILD
+Rule 30    multTag -> MAR
+Rule 31    singTag -> WIFE
+Rule 32    singTag -> DIV
+Rule 33    singTag -> HUSBAND
+Rule 34    singTag -> CHILD
 
 Terminals, with rules where they appear
 
@@ -60,11 +60,11 @@ ADDR                 :
 ADDRESS              : 
 ALIAS                : 
 BARRA                : 
-BEGIN                : 4 10
+BEGIN                : 4 11
 BIRTH                : 26
 BURIAL               : 17 29
 CHAR                 : 
-CHILD                : 32
+CHILD                : 34
 CHR                  : 28
 COMM                 : 
 CONT                 : 
@@ -72,38 +72,38 @@ CONTENT              : 7 14
 DATE                 : 24
 DEATH                : 27
 DEST                 : 
-DIV                  : 
-FAM                  : 10 11
+DIV                  : 32
+FAM                  : 11
 FAMC                 : 23
 FAMS                 : 22
 FILE                 : 
 HEADER               : 
-HUSBAND              : 31
+HUSBAND              : 33
 ID                   : 
 INDI                 : 4
-LEVEL                : 4 5 6 10 11 12 13 15
-MAR                  : 
+LEVEL                : 4 5 6 11 12 13 16
+MAR                  : 30
 NAME                 : 18
 PHONE                : 
 PLACE                : 25
-POINTER              : 4 10 11
+POINTER              : 4 11
 REFN                 : 21
 SEX                  : 20
 SOUR                 : 
 TITLE                : 19
-TRLR                 : 15
-WIFE                 : 30
+TRLR                 : 16
+WIFE                 : 31
 error                : 
 
 Nonterminals, with rules where they appear
 
 conteudo             : 4 5
-conteudoF            : 10 11 12
+conteudoF            : 11 12
 end                  : 1
-families             : 1 8
-family               : 8 9
+families             : 1 9
+family               : 9 10
 gedcom               : 0
-multTag              : 16
+multTag              : 8 15
 people               : 1 2
 person               : 2 3
 restFams             : 12 13
@@ -136,11 +136,10 @@ state 2
 
     (1) gedcom -> people . families end
     (2) people -> people . person
-    (8) families -> . families family
-    (9) families -> . family
+    (9) families -> . families family
+    (10) families -> . family
     (4) person -> . LEVEL POINTER INDI conteudo BEGIN
-    (10) family -> . LEVEL POINTER FAM conteudoF BEGIN
-    (11) family -> . LEVEL POINTER FAM conteudoF
+    (11) family -> . LEVEL POINTER FAM conteudoF BEGIN
 
     LEVEL           shift and go to state 8
 
@@ -165,10 +164,9 @@ state 4
 state 5
 
     (1) gedcom -> people families . end
-    (8) families -> families . family
-    (15) end -> . LEVEL TRLR
-    (10) family -> . LEVEL POINTER FAM conteudoF BEGIN
-    (11) family -> . LEVEL POINTER FAM conteudoF
+    (9) families -> families . family
+    (16) end -> . LEVEL TRLR
+    (11) family -> . LEVEL POINTER FAM conteudoF BEGIN
 
     LEVEL           shift and go to state 12
 
@@ -184,16 +182,15 @@ state 6
 
 state 7
 
-    (9) families -> family .
+    (10) families -> family .
 
-    LEVEL           reduce using rule 9 (families -> family .)
+    LEVEL           reduce using rule 10 (families -> family .)
 
 
 state 8
 
     (4) person -> LEVEL . POINTER INDI conteudo BEGIN
-    (10) family -> LEVEL . POINTER FAM conteudoF BEGIN
-    (11) family -> LEVEL . POINTER FAM conteudoF
+    (11) family -> LEVEL . POINTER FAM conteudoF BEGIN
 
     POINTER         shift and go to state 13
 
@@ -214,16 +211,15 @@ state 10
 
 state 11
 
-    (8) families -> families family .
+    (9) families -> families family .
 
-    LEVEL           reduce using rule 8 (families -> families family .)
+    LEVEL           reduce using rule 9 (families -> families family .)
 
 
 state 12
 
-    (15) end -> LEVEL . TRLR
-    (10) family -> LEVEL . POINTER FAM conteudoF BEGIN
-    (11) family -> LEVEL . POINTER FAM conteudoF
+    (16) end -> LEVEL . TRLR
+    (11) family -> LEVEL . POINTER FAM conteudoF BEGIN
 
     TRLR            shift and go to state 15
     POINTER         shift and go to state 16
@@ -232,8 +228,7 @@ state 12
 state 13
 
     (4) person -> LEVEL POINTER . INDI conteudo BEGIN
-    (10) family -> LEVEL POINTER . FAM conteudoF BEGIN
-    (11) family -> LEVEL POINTER . FAM conteudoF
+    (11) family -> LEVEL POINTER . FAM conteudoF BEGIN
 
     INDI            shift and go to state 14
     FAM             shift and go to state 17
@@ -251,23 +246,21 @@ state 14
 
 state 15
 
-    (15) end -> LEVEL TRLR .
+    (16) end -> LEVEL TRLR .
 
-    $end            reduce using rule 15 (end -> LEVEL TRLR .)
+    $end            reduce using rule 16 (end -> LEVEL TRLR .)
 
 
 state 16
 
-    (10) family -> LEVEL POINTER . FAM conteudoF BEGIN
-    (11) family -> LEVEL POINTER . FAM conteudoF
+    (11) family -> LEVEL POINTER . FAM conteudoF BEGIN
 
     FAM             shift and go to state 17
 
 
 state 17
 
-    (10) family -> LEVEL POINTER FAM . conteudoF BEGIN
-    (11) family -> LEVEL POINTER FAM . conteudoF
+    (11) family -> LEVEL POINTER FAM . conteudoF BEGIN
     (12) conteudoF -> . conteudoF LEVEL restFams
     (13) conteudoF -> . LEVEL restFams
 
@@ -279,7 +272,7 @@ state 18
 
     (6) conteudo -> LEVEL . restPerson
     (7) restPerson -> . singTag CONTENT
-    (16) restPerson -> . multTag
+    (8) restPerson -> . multTag
     (17) singTag -> . BURIAL
     (18) singTag -> . NAME
     (19) singTag -> . TITLE
@@ -289,13 +282,15 @@ state 18
     (23) singTag -> . FAMC
     (24) singTag -> . DATE
     (25) singTag -> . PLACE
-    (30) singTag -> . WIFE
-    (31) singTag -> . HUSBAND
-    (32) singTag -> . CHILD
+    (31) singTag -> . WIFE
+    (32) singTag -> . DIV
+    (33) singTag -> . HUSBAND
+    (34) singTag -> . CHILD
     (26) multTag -> . BIRTH
     (27) multTag -> . DEATH
     (28) multTag -> . CHR
     (29) multTag -> . BURIAL
+    (30) multTag -> . MAR
 
     BURIAL          shift and go to state 25
     NAME            shift and go to state 26
@@ -307,11 +302,13 @@ state 18
     DATE            shift and go to state 32
     PLACE           shift and go to state 33
     WIFE            shift and go to state 34
-    HUSBAND         shift and go to state 35
-    CHILD           shift and go to state 36
-    BIRTH           shift and go to state 37
-    DEATH           shift and go to state 38
-    CHR             shift and go to state 39
+    DIV             shift and go to state 35
+    HUSBAND         shift and go to state 36
+    CHILD           shift and go to state 37
+    BIRTH           shift and go to state 38
+    DEATH           shift and go to state 39
+    CHR             shift and go to state 40
+    MAR             shift and go to state 41
 
     restPerson                     shift and go to state 22
     singTag                        shift and go to state 23
@@ -322,14 +319,15 @@ state 19
     (4) person -> LEVEL POINTER INDI conteudo . BEGIN
     (5) conteudo -> conteudo . LEVEL restPerson
 
-    BEGIN           shift and go to state 41
-    LEVEL           shift and go to state 40
+    BEGIN           shift and go to state 43
+    LEVEL           shift and go to state 42
 
 
 state 20
 
     (13) conteudoF -> LEVEL . restFams
     (14) restFams -> . singTag CONTENT
+    (15) restFams -> . multTag
     (17) singTag -> . BURIAL
     (18) singTag -> . NAME
     (19) singTag -> . TITLE
@@ -339,11 +337,17 @@ state 20
     (23) singTag -> . FAMC
     (24) singTag -> . DATE
     (25) singTag -> . PLACE
-    (30) singTag -> . WIFE
-    (31) singTag -> . HUSBAND
-    (32) singTag -> . CHILD
+    (31) singTag -> . WIFE
+    (32) singTag -> . DIV
+    (33) singTag -> . HUSBAND
+    (34) singTag -> . CHILD
+    (26) multTag -> . BIRTH
+    (27) multTag -> . DEATH
+    (28) multTag -> . CHR
+    (29) multTag -> . BURIAL
+    (30) multTag -> . MAR
 
-    BURIAL          shift and go to state 44
+    BURIAL          shift and go to state 25
     NAME            shift and go to state 26
     TITLE           shift and go to state 27
     SEX             shift and go to state 28
@@ -353,23 +357,25 @@ state 20
     DATE            shift and go to state 32
     PLACE           shift and go to state 33
     WIFE            shift and go to state 34
-    HUSBAND         shift and go to state 35
-    CHILD           shift and go to state 36
+    DIV             shift and go to state 35
+    HUSBAND         shift and go to state 36
+    CHILD           shift and go to state 37
+    BIRTH           shift and go to state 38
+    DEATH           shift and go to state 39
+    CHR             shift and go to state 40
+    MAR             shift and go to state 41
 
-    restFams                       shift and go to state 42
-    singTag                        shift and go to state 43
+    restFams                       shift and go to state 44
+    singTag                        shift and go to state 45
+    multTag                        shift and go to state 46
 
 state 21
 
-    (10) family -> LEVEL POINTER FAM conteudoF . BEGIN
-    (11) family -> LEVEL POINTER FAM conteudoF .
+    (11) family -> LEVEL POINTER FAM conteudoF . BEGIN
     (12) conteudoF -> conteudoF . LEVEL restFams
 
-  ! shift/reduce conflict for LEVEL resolved as shift
-    BEGIN           shift and go to state 46
-    LEVEL           shift and go to state 45
-
-  ! LEVEL           [ reduce using rule 11 (family -> LEVEL POINTER FAM conteudoF .) ]
+    BEGIN           shift and go to state 48
+    LEVEL           shift and go to state 47
 
 
 state 22
@@ -384,15 +390,15 @@ state 23
 
     (7) restPerson -> singTag . CONTENT
 
-    CONTENT         shift and go to state 47
+    CONTENT         shift and go to state 49
 
 
 state 24
 
-    (16) restPerson -> multTag .
+    (8) restPerson -> multTag .
 
-    BEGIN           reduce using rule 16 (restPerson -> multTag .)
-    LEVEL           reduce using rule 16 (restPerson -> multTag .)
+    BEGIN           reduce using rule 8 (restPerson -> multTag .)
+    LEVEL           reduce using rule 8 (restPerson -> multTag .)
 
 
 state 25
@@ -463,26 +469,33 @@ state 33
 
 state 34
 
-    (30) singTag -> WIFE .
+    (31) singTag -> WIFE .
 
-    CONTENT         reduce using rule 30 (singTag -> WIFE .)
+    CONTENT         reduce using rule 31 (singTag -> WIFE .)
 
 
 state 35
 
-    (31) singTag -> HUSBAND .
+    (32) singTag -> DIV .
 
-    CONTENT         reduce using rule 31 (singTag -> HUSBAND .)
+    CONTENT         reduce using rule 32 (singTag -> DIV .)
 
 
 state 36
 
-    (32) singTag -> CHILD .
+    (33) singTag -> HUSBAND .
 
-    CONTENT         reduce using rule 32 (singTag -> CHILD .)
+    CONTENT         reduce using rule 33 (singTag -> HUSBAND .)
 
 
 state 37
+
+    (34) singTag -> CHILD .
+
+    CONTENT         reduce using rule 34 (singTag -> CHILD .)
+
+
+state 38
 
     (26) multTag -> BIRTH .
 
@@ -490,7 +503,7 @@ state 37
     LEVEL           reduce using rule 26 (multTag -> BIRTH .)
 
 
-state 38
+state 39
 
     (27) multTag -> DEATH .
 
@@ -498,7 +511,7 @@ state 38
     LEVEL           reduce using rule 27 (multTag -> DEATH .)
 
 
-state 39
+state 40
 
     (28) multTag -> CHR .
 
@@ -506,11 +519,19 @@ state 39
     LEVEL           reduce using rule 28 (multTag -> CHR .)
 
 
-state 40
+state 41
+
+    (30) multTag -> MAR .
+
+    BEGIN           reduce using rule 30 (multTag -> MAR .)
+    LEVEL           reduce using rule 30 (multTag -> MAR .)
+
+
+state 42
 
     (5) conteudo -> conteudo LEVEL . restPerson
     (7) restPerson -> . singTag CONTENT
-    (16) restPerson -> . multTag
+    (8) restPerson -> . multTag
     (17) singTag -> . BURIAL
     (18) singTag -> . NAME
     (19) singTag -> . TITLE
@@ -520,13 +541,15 @@ state 40
     (23) singTag -> . FAMC
     (24) singTag -> . DATE
     (25) singTag -> . PLACE
-    (30) singTag -> . WIFE
-    (31) singTag -> . HUSBAND
-    (32) singTag -> . CHILD
+    (31) singTag -> . WIFE
+    (32) singTag -> . DIV
+    (33) singTag -> . HUSBAND
+    (34) singTag -> . CHILD
     (26) multTag -> . BIRTH
     (27) multTag -> . DEATH
     (28) multTag -> . CHR
     (29) multTag -> . BURIAL
+    (30) multTag -> . MAR
 
     BURIAL          shift and go to state 25
     NAME            shift and go to state 26
@@ -538,24 +561,26 @@ state 40
     DATE            shift and go to state 32
     PLACE           shift and go to state 33
     WIFE            shift and go to state 34
-    HUSBAND         shift and go to state 35
-    CHILD           shift and go to state 36
-    BIRTH           shift and go to state 37
-    DEATH           shift and go to state 38
-    CHR             shift and go to state 39
+    DIV             shift and go to state 35
+    HUSBAND         shift and go to state 36
+    CHILD           shift and go to state 37
+    BIRTH           shift and go to state 38
+    DEATH           shift and go to state 39
+    CHR             shift and go to state 40
+    MAR             shift and go to state 41
 
-    restPerson                     shift and go to state 48
+    restPerson                     shift and go to state 50
     singTag                        shift and go to state 23
     multTag                        shift and go to state 24
 
-state 41
+state 43
 
     (4) person -> LEVEL POINTER INDI conteudo BEGIN .
 
     LEVEL           reduce using rule 4 (person -> LEVEL POINTER INDI conteudo BEGIN .)
 
 
-state 42
+state 44
 
     (13) conteudoF -> LEVEL restFams .
 
@@ -563,24 +588,26 @@ state 42
     LEVEL           reduce using rule 13 (conteudoF -> LEVEL restFams .)
 
 
-state 43
+state 45
 
     (14) restFams -> singTag . CONTENT
 
-    CONTENT         shift and go to state 49
+    CONTENT         shift and go to state 51
 
 
-state 44
+state 46
 
-    (17) singTag -> BURIAL .
+    (15) restFams -> multTag .
 
-    CONTENT         reduce using rule 17 (singTag -> BURIAL .)
+    BEGIN           reduce using rule 15 (restFams -> multTag .)
+    LEVEL           reduce using rule 15 (restFams -> multTag .)
 
 
-state 45
+state 47
 
     (12) conteudoF -> conteudoF LEVEL . restFams
     (14) restFams -> . singTag CONTENT
+    (15) restFams -> . multTag
     (17) singTag -> . BURIAL
     (18) singTag -> . NAME
     (19) singTag -> . TITLE
@@ -590,11 +617,17 @@ state 45
     (23) singTag -> . FAMC
     (24) singTag -> . DATE
     (25) singTag -> . PLACE
-    (30) singTag -> . WIFE
-    (31) singTag -> . HUSBAND
-    (32) singTag -> . CHILD
+    (31) singTag -> . WIFE
+    (32) singTag -> . DIV
+    (33) singTag -> . HUSBAND
+    (34) singTag -> . CHILD
+    (26) multTag -> . BIRTH
+    (27) multTag -> . DEATH
+    (28) multTag -> . CHR
+    (29) multTag -> . BURIAL
+    (30) multTag -> . MAR
 
-    BURIAL          shift and go to state 44
+    BURIAL          shift and go to state 25
     NAME            shift and go to state 26
     TITLE           shift and go to state 27
     SEX             shift and go to state 28
@@ -604,20 +637,26 @@ state 45
     DATE            shift and go to state 32
     PLACE           shift and go to state 33
     WIFE            shift and go to state 34
-    HUSBAND         shift and go to state 35
-    CHILD           shift and go to state 36
+    DIV             shift and go to state 35
+    HUSBAND         shift and go to state 36
+    CHILD           shift and go to state 37
+    BIRTH           shift and go to state 38
+    DEATH           shift and go to state 39
+    CHR             shift and go to state 40
+    MAR             shift and go to state 41
 
-    restFams                       shift and go to state 50
-    singTag                        shift and go to state 43
+    restFams                       shift and go to state 52
+    singTag                        shift and go to state 45
+    multTag                        shift and go to state 46
 
-state 46
+state 48
 
-    (10) family -> LEVEL POINTER FAM conteudoF BEGIN .
+    (11) family -> LEVEL POINTER FAM conteudoF BEGIN .
 
-    LEVEL           reduce using rule 10 (family -> LEVEL POINTER FAM conteudoF BEGIN .)
+    LEVEL           reduce using rule 11 (family -> LEVEL POINTER FAM conteudoF BEGIN .)
 
 
-state 47
+state 49
 
     (7) restPerson -> singTag CONTENT .
 
@@ -625,7 +664,7 @@ state 47
     LEVEL           reduce using rule 7 (restPerson -> singTag CONTENT .)
 
 
-state 48
+state 50
 
     (5) conteudo -> conteudo LEVEL restPerson .
 
@@ -633,7 +672,7 @@ state 48
     LEVEL           reduce using rule 5 (conteudo -> conteudo LEVEL restPerson .)
 
 
-state 49
+state 51
 
     (14) restFams -> singTag CONTENT .
 
@@ -641,14 +680,10 @@ state 49
     LEVEL           reduce using rule 14 (restFams -> singTag CONTENT .)
 
 
-state 50
+state 52
 
     (12) conteudoF -> conteudoF LEVEL restFams .
 
     BEGIN           reduce using rule 12 (conteudoF -> conteudoF LEVEL restFams .)
     LEVEL           reduce using rule 12 (conteudoF -> conteudoF LEVEL restFams .)
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for LEVEL in state 21 resolved as shift

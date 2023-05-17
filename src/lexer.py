@@ -102,11 +102,13 @@ t_ANY_MAR = r"MARR"
 t_ANY_TITLE = r"TITL"
 t_ANY_PLACE = r"PLAC"
 
+t_FAM = r"FAM\b"
+
 t_ANY_INDI = r"INDI"
 t_ANY_FAMS = r'FAMS'
 t_FAMC = r'FAMC'
 
-t_FAM = r"FAM(?!=S|C)"
+
 t_CHILD = r'CHIL'
 t_HUSBAND = r'HUSB'
 t_WIFE = r'WIFE'
@@ -134,7 +136,7 @@ def t_LEVEL(t):
 
 
 def t_CONTENT(t):
-	r"""(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI|REFN|FAMS|FAMC|WIFE|HUSB|CHIL)[^\n]+"""
+	r"""(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI|REFN|FAMS|FAMC|WIFE|HUSB|CHIL|DIV\ |MARR)[^\n]+"""
 	return t
 
 
