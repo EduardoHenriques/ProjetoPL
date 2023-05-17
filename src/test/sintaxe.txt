@@ -1,6 +1,6 @@
-0 @F1420@ FAM
-1 WIFE @I3000@
-1 CHIL @I2999@
+0 @I2@ INDI
+1 NAME Albert Augustus Charles//
+1 TITL Prince
 0 @F1421@ FAM
 1 HUSB @I3001@
 1 CHIL @I3000@
@@ -8,3 +8,4 @@
 1 HUSB @I3007@
 1 WIFE @I3008@
 1 CHIL @I2995@
+0 TRLR

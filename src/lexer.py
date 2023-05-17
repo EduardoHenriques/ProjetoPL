@@ -15,17 +15,11 @@ def t_error(t):
 	t.lexer.skip(1)
 
 
-'''
-states = [
-	("comm", "inclusive"),
-	("birth", "inclusive"),
-	("death", "inclusive"),
-	("burial", "inclusive"),
-	("marriage", "inclusive"),
-	("individual", "inclusive"),
-	("family", "inclusive")
-]
-'''
+#    states = [
+#    	 ("pessoa", "exclusive"),
+#    	 ("familia", "exclusive")
+#    ]
+#
 tokens = [
 	"BARRA",
 
@@ -69,51 +63,69 @@ tokens = [
 
 	"FAM",
 	"INDI",
-	"CHR"
-
+	"CHR",
+	"BEGIN",
+	"TRLR"
 ]
 
-# expressoes tokens
+# expressoes tokens e estados
+
+t_ANY_ignore = r"\t\s\n"
+
+t_BEGIN = r"\n(?=0)"
+t_TRLR = r"TRLR"
+
+t_ANY_POINTER = r"\@\w+[^@]?\@"
+t_ANY_REFN = r"REFN"
+
+t_ANY_COMM = r"COMM"
+t_ANY_HEADER = r"\sHEAD"
+t_ANY_CONT = r"CONT"
+t_ANY_DEST = r"DEST"
+t_ANY_FILE = r"FILE"
+t_ANY_CHAR = r"CHAR"
+t_ANY_ADDR = r"ADDR"
+t_ANY_NAME = r"NAME"
+t_ANY_SOUR = r"SOUR"
+t_ANY_PHONE = r"PHON"
 
 
-t_ignore = r"\t\s\n"
+t_ANY_DATE = r"DATE"
+t_ANY_ALIAS = r'ALIAS'
+t_ANY_SEX = r"SEX"
+t_ANY_CHR = r"CHR"
 
-t_POINTER = r"\@\w+[^@]?\@"
-t_INDI = r"INDI"
-t_REFN = r"REFN"
+t_ANY_BIRTH = "BIRT"
+t_ANY_DEATH = "DEAT"
+t_ANY_BURIAL = r"BURI"
+t_ANY_MAR = r"MARR"
+t_ANY_TITLE = r"TITL"
+t_ANY_PLACE = r"PLAC"
 
-t_COMM = r"COMM"
-t_HEADER = r"\sHEAD"
-t_CONT = r"CONT"
-t_DEST = r"DEST"
-t_FILE = r"FILE"
-t_CHAR = r"CHAR"
-t_ADDR = r"ADDR"
-t_NAME = r"NAME"
-t_SOUR = r"SOUR"
-t_PHONE = r"PHON"
-
-
-t_DATE = r"DATE"
-t_ALIAS = r'ALIAS'
-t_SEX = r"SEX"
-t_CHR = r"CHR"
-
-t_BIRTH = "BIRT"
-t_DEATH = "DEAT"
-t_BURIAL = r"BURI"
-t_MAR = r"MARR"
-t_TITLE = r"TITL"
-t_PLACE = r"PLAC"
-
-t_FAMS = r'FAMS'
-t_FAM = r'FAM'
+t_ANY_INDI = r"INDI"
+t_ANY_FAMS = r'FAMS'
 t_FAMC = r'FAMC'
 
+t_FAM = r"FAM(?!=S|C)"
 t_CHILD = r'CHIL'
 t_HUSBAND = r'HUSB'
 t_WIFE = r'WIFE'
 t_DIV = r'DIV'
+
+
+#def t_begin_pessoa(t):
+#	r"""INDI"""
+#	t.lexer.begin('pessoa')
+
+
+#def t_pessoa_end(t):
+#	r"""FAM"""
+#	t.lexer.begin('familia')
+
+
+#def t_familia_end(t):
+#	r"""TRLR"""
+#	t.lexer.begin('INITIAL')
 
 
 def t_LEVEL(t):
@@ -126,142 +138,13 @@ def t_CONTENT(t):
 	return t
 
 
-'''
-# individuo é guardado num dicionario de acordo c/ o pointer correspondente
-def t_individual_NAME(t):
-	r"""(?<=NAME).+"""
-	global name, dic
-	name = t.value
-	dic[pointer] = name
-	return t
-
-
-#									#
-#		 FUNCOES PARA ESTADOS		#
-#									#
-
-
-# pessoa
-def t_OpenIndividual(t):
-	r"""\s*\@\w+[^@]?\@\s*(?=INDI)"""
-	global indi_level, level, pointer
-	indi_level = level
-	t.lexer.push_state("individual")
-	pointer = re.sub(r"\s*", "", t.value)
-	print(pointer)
-
-
-def t_individual_CloseIndividual(t):
-	r"""^\d+"""
-	global level, indi_level
-	level = int(t.value)
-	if indi_level >= level:
-		t.lexer.pop_state()
-
-
-# familia
-def t_OpenFamily(t):
-	r"""\s*\@\w+[^@]?\@\s*(?=FAM)"""
-	global indi_level, level, pointer
-	indi_level = level
-	t.lexer.push_state("family")
-	pointer = re.sub(r"\s*", "", t.value)
-	print(pointer)
-
-
-def t_family_CloseFamily(t):
-	r"""^\d+"""
-	global level, indi_level
-	level = int(t.value)
-	if indi_level >= level:
-		t.lexer.pop_state()
-
-
-# comentario
-def t_OpenComm(t):
-	r"""COMM"""
-	global comm_level, level
-	comm_level = level
-	t.lexer.push_state("comm")
-
-
-def t_comm_CloseComm(t):
-	r"""^\d+"""
-	global level, comm_level
-	level = int(t.value)
-	if comm_level >= level:
-		t.lexer.pop_state()
-
-
-# nascimento
-def t_OpenBirth(t):
-	r"""BIRT"""
-	global comm_level
-	comm_level = level
-	t.lexer.push_state("birth")
-
-
-def t_birth_CloseBirth(t):
-	r"""^\d+"""
-	global level, comm_level
-	level = int(t.value)
-	if comm_level >= level:
-		t.lexer.pop_state()
-
-
-# morte
-def t_OpenDeath(t):
-	r"""DEAT"""
-	global comm_level
-	comm_level = level
-	t.lexer.push_state("death")
-
-
-def t_death_CloseDeath(t):
-	r"""^\d+"""
-	global level, comm_level
-	level = int(t.value)
-	if comm_level >= level:
-		t.lexer.pop_state()
-
-
-# enterro
-def t_OpenBurial(t):
-	r"""BURI"""
-	global comm_level
-	comm_level = level
-	t.lexer.push_state("burial")
-
-
-def t_burial_CloseBurial(t):
-	r"""^\d+"""
-	global level, comm_level
-	level = int(t.value)
-	if comm_level >= level:
-		t.lexer.pop_state()
-
-
-# casamento
-def t_OpenMarriage(t):
-	r"""MARR"""
-	global comm_level
-	comm_level = level
-	t.lexer.push_state("marriage")
-
-
-def t_marriage_CloseMarriage(t):
-	r"""^\d+"""
-	global level, comm_level
-	level = int(t.value)
-	if comm_level >= level:
-		t.lexer.pop_state()
-'''
-
 lexer = lex.lex()
 
 if __name__ == "__main__":
 
-	lexer.input("1 NAME Victoria  /Hanover/")
-	for token in lexer:
-		print(
-			f"{token.type:<10} | {token.value:<50}")
+	with open("test/sintaxe.txt",'r') as f:
+		lines = f.readlines()
+		for line in lines:
+			lexer.input(line)
+			for token in lexer:
+				print(f"{token.type:<10} | {token.value:<50}")
