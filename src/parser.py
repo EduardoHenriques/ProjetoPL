@@ -30,9 +30,9 @@ def p_person_pointer_indi(p):
 	global lista_pessoas
 	global pessoa_atual
 	id_int = p[2].replace("@", '')  # obter ID
-	p[0] = "<ID>" + id_int + "</ID>"
+	p[0] = "<ID>" + p[2] + "</ID>"
 	print(p[0])
-	pessoa_atual.add_id(id_int)  # associar ID á pessoa
+	pessoa_atual.add_id(p[2])  # associar ID á pessoa
 	lista_pessoas[id_int] = pessoa_atual  # guardar pessoa na lista
 	pessoa_atual = Pessoa()  # dar reset a pessoal atual
 
@@ -113,11 +113,12 @@ def p_restFams_single(p):
 
 	if familia_atual is not None:
 		if str([p[1]][0]) == "WIFE":
-			familia_atual.add_wife(p[2])
-		elif str([p[1]][0]) == "HUSBAND":
-			familia_atual.add_husband(p[2])
-		elif str([p[1]][0]) == "CHILD":
-			familia_atual.add_child(p[2])
+			familia_atual.add_wife(str(p[2]).strip())
+		elif str([p[1]][0]) == "HUSB":
+			familia_atual.add_husband(str(p[2]).strip())
+		elif str([p[1]][0]) == "CHIL":
+			familia_atual.add_child(str(p[2]).strip())
+
 		familia_atual.add_line(p[0])
 	else:
 		print("familia nula")
@@ -146,22 +147,22 @@ def p_singTag_burial(p):
 
 def p_singTag_name(p):
 	""" singTag		: NAME"""
-	p[0] = p[1]
+	p[0] = "Nome"
 
 
 def p_singTag_title(p):
 	""" singTag		: TITLE"""
-	p[0] = p[1]
+	p[0] = "Titulo"
 
 
 def p_singTag_sex(p):
 	""" singTag		: SEX"""
-	p[0] = p[1]
+	p[0] = "Sexo"
 
 
 def p_singTag_refn(p):
 	""" singTag		: REFN"""
-	p[0] = p[1]
+	p[0] = "Ref"
 
 
 def p_singTag_fams(p):
@@ -176,45 +177,45 @@ def p_singTag_famc(p):
 
 def p_singTag_date(p):
 	""" singTag		: DATE"""
-	p[0] = p[1] + "  tipo=" + tipo
+	p[0] = "Data" + tipo
 
 
 def p_singTag_place(p):
 	"""singTag		: PLACE"""
-	p[0] = p[1] + "  tipo=" + tipo
+	p[0] = "Local" + tipo
 
 
 def p_multTag_birth(p):
 	"""multTag		: BIRTH"""
-	p[0] = p[1]
+	p[0] = "Nasc"
 	global tipo
 	tipo = p[0]
 
 
 def p_multTag_death(p):
 	"""multTag		: DEATH"""
-	p[0] = p[1]
+	p[0] = "Óbito"
 	global tipo
 	tipo = p[0]
 
 
 def p_multTag_chr(p):
 	"""multTag		: CHR"""
-	p[0] = p[1]
+	p[0] = "Batismo"
 	global tipo
 	tipo = p[0]
 
 
 def p_multTag_burial(p):
 	"""multTag		: BURIAL"""
-	p[0] = p[1]
+	p[0] = "Enterro"
 	global tipo
 	tipo = p[0]
 
 
 def p_multTag_marriage(p):
 	"""multTag		: MAR"""
-	p[0] = p[1]
+	p[0] = "Casamento"
 	global tipo
 	tipo = p[0]
 
@@ -246,6 +247,7 @@ def p_error(p):
 	print(p)
 	p.success = False
 	print("Syntax Error!", p)
+	exit()
 
 
 parser = yacc.yacc()
@@ -272,3 +274,6 @@ with open("test/output.txt", "w") as f:
 		fam = familiy_tree[familia]
 		f.write("<familia>" + fam.__str__() + "</familia>\n")
 	print("End")
+	for idF in familiy_tree.keys():
+		fam = familiy_tree[idF]
+		print(fam.child_list)

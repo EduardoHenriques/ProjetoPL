@@ -34,12 +34,14 @@ class Pessoa:
 		if famID is not None:
 			family = family_tree[famID]
 			if family.wife is not None:
-				self.linhas[:-1] += "\n\t<mae>" + family.wife + "</mae>"
+				self.linhas += "\n\t<mae>" + family.wife + "</mae>"
 				print("No mom?O_o")
-			elif family.husband is not None:
-				self.linhas[:-1] += "\n\t<pai>" + family.wife + "</pai>"
+			if family.husband is not None:
+				self.linhas += "\n\t<pai>" + family.husband + "</pai>"
 				print("No dad?o_O")
-			else:
-				print("found parents")
+			if len(family.child_list) != 0:
+				for irmao in family.child_list:
+					if self.id != irmao:
+						self.linhas += "\n\t<irmao>" + irmao + "</irmao>"
 		else:
 			print("Key Error:")
