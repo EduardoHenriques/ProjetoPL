@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BEGIN BIRTH BURIAL CHAN CHR CONT CONTENT DEATH END_FILE FAM GEDC INDI LEVEL MAR POINTER START_FILEgedcom  \t: START_FILE header BEGIN people familiesheader : header LEVEL restHeader\n\t\t\t  | LEVEL restHeaderrestHeader : CONTENT\n\t\t\t\t  | multTagpeople : people person\n\t\t\t  | personperson :  LEVEL POINTER INDI conteudo BEGINconteudo\t\t: conteudo LEVEL restPerson\n\t\t\t\t\t| LEVEL restPerson  restPerson\t: CONTENTrestPerson\t: multTagfamilies : families family\n\t\t\t\t| family family : LEVEL POINTER FAM conteudoF BEGIN\n\t\t\t  | LEVEL POINTER FAM conteudoF END_FILEconteudoF\t\t: conteudoF LEVEL restFams\n\t\t\t\t\t\t| LEVEL restFams\n\t\t\t\t\t\t| restFams\t: CONTENTrestFams\t: multTagmultTag\t\t: BIRTHmultTag\t\t: CHANmultTag\t\t: DEATHmultTag\t\t: CHRmultTag\t\t: BURIALmultTag\t\t: MARmultTag\t\t: GEDCmultTag  : CONT'
+_lr_signature = 'BEGIN BIRTH BURIAL CHAN CHR CONT CONTENT DEATH END_FILE FAM GEDC INDI LEVEL MAR POINTER START_FILEgedcom  \t: START_FILE header BEGIN people familiesheader : header LEVEL restHeader\n\t\t\t  | LEVEL restHeaderrestHeader : CONTENT\n\t\t\t\t  | multTagpeople : people person\n\t\t\t  | personperson :  LEVEL POINTER INDI conteudo BEGINconteudo\t\t: conteudo LEVEL restPerson\n\t\t\t\t\t| LEVEL restPerson  restPerson\t: CONTENTrestPerson\t: multTagfamilies : families family\n\t\t\t\t| family family : LEVEL POINTER FAM conteudoF BEGIN\n\t\t\t  | LEVEL POINTER FAM conteudoF END_FILE\n\t\t\t  | LEVEL POINTER FAM BEGIN\n\t\t\t  | LEVEL POINTER FAM END_FILEconteudoF\t\t: conteudoF LEVEL restFams\n\t\t\t\t\t\t| LEVEL restFamsrestFams\t: CONTENTrestFams\t: multTagmultTag\t\t: BIRTHmultTag\t\t: CHANmultTag\t\t: DEATHmultTag\t\t: CHRmultTag\t\t: BURIALmultTag\t\t: MARmultTag\t\t: GEDCmultTag  : CONT'
     
-_lr_action_items = {'START_FILE':([0,],[2,]),'$end':([1,22,24,27,46,47,],[0,-1,-14,-13,-15,-16,]),'LEVEL':([2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,27,30,32,34,36,37,38,39,41,42,43,44,46,47,48,49,],[4,6,20,-3,-4,-5,-22,-23,-24,-25,-26,-27,-28,-29,25,-7,-2,28,-6,-14,-13,33,35,40,45,-10,-11,-12,-8,-18,-20,-21,-15,-16,-9,-17,]),'BEGIN':([3,7,8,9,10,11,12,13,14,15,16,17,21,32,34,36,37,38,39,42,43,44,48,49,],[5,-3,-4,-5,-22,-23,-24,-25,-26,-27,-28,-29,-2,-19,41,46,-10,-11,-12,-18,-20,-21,-9,-17,]),'CONTENT':([4,6,33,35,40,45,],[8,8,38,43,38,43,]),'BIRTH':([4,6,33,35,40,45,],[10,10,10,10,10,10,]),'CHAN':([4,6,33,35,40,45,],[11,11,11,11,11,11,]),'DEATH':([4,6,33,35,40,45,],[12,12,12,12,12,12,]),'CHR':([4,6,33,35,40,45,],[13,13,13,13,13,13,]),'BURIAL':([4,6,33,35,40,45,],[14,14,14,14,14,14,]),'MAR':([4,6,33,35,40,45,],[15,15,15,15,15,15,]),'GEDC':([4,6,33,35,40,45,],[16,16,16,16,16,16,]),'CONT':([4,6,33,35,40,45,],[17,17,17,17,17,17,]),'END_FILE':([10,11,12,13,14,15,16,17,32,36,42,43,44,49,],[-22,-23,-24,-25,-26,-27,-28,-29,-19,47,-18,-20,-21,-17,]),'POINTER':([20,25,28,],[26,29,31,]),'INDI':([26,29,],[30,30,]),'FAM':([29,31,],[32,32,]),}
+_lr_action_items = {'START_FILE':([0,],[2,]),'$end':([1,22,24,27,37,38,48,49,],[0,-1,-14,-13,-17,-18,-15,-16,]),'LEVEL':([2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,27,30,32,34,36,37,38,39,40,41,43,44,45,46,48,49,50,51,],[4,6,20,-3,-4,-5,-23,-24,-25,-26,-27,-28,-29,-30,25,-7,-2,28,-6,-14,-13,33,35,42,47,-17,-18,-10,-11,-12,-8,-20,-21,-22,-15,-16,-9,-19,]),'BEGIN':([3,7,8,9,10,11,12,13,14,15,16,17,21,32,34,36,39,40,41,44,45,46,50,51,],[5,-3,-4,-5,-23,-24,-25,-26,-27,-28,-29,-30,-2,37,43,48,-10,-11,-12,-20,-21,-22,-9,-19,]),'CONTENT':([4,6,33,35,42,47,],[8,8,40,45,40,45,]),'BIRTH':([4,6,33,35,42,47,],[10,10,10,10,10,10,]),'CHAN':([4,6,33,35,42,47,],[11,11,11,11,11,11,]),'DEATH':([4,6,33,35,42,47,],[12,12,12,12,12,12,]),'CHR':([4,6,33,35,42,47,],[13,13,13,13,13,13,]),'BURIAL':([4,6,33,35,42,47,],[14,14,14,14,14,14,]),'MAR':([4,6,33,35,42,47,],[15,15,15,15,15,15,]),'GEDC':([4,6,33,35,42,47,],[16,16,16,16,16,16,]),'CONT':([4,6,33,35,42,47,],[17,17,17,17,17,17,]),'END_FILE':([10,11,12,13,14,15,16,17,32,36,44,45,46,51,],[-23,-24,-25,-26,-27,-28,-29,-30,38,49,-20,-21,-22,-19,]),'POINTER':([20,25,28,],[26,29,31,]),'INDI':([26,29,],[30,30,]),'FAM':([29,31,],[32,32,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'gedcom':([0,],[1,]),'header':([2,],[3,]),'restHeader':([4,6,],[7,21,]),'multTag':([4,6,33,35,40,45,],[9,9,39,44,39,44,]),'people':([5,],[18,]),'person':([5,18,],[19,23,]),'families':([18,],[22,]),'family':([18,22,],[24,27,]),'conteudo':([30,],[34,]),'conteudoF':([32,],[36,]),'restPerson':([33,40,],[37,48,]),'restFams':([35,45,],[42,49,]),}
+_lr_goto_items = {'gedcom':([0,],[1,]),'header':([2,],[3,]),'restHeader':([4,6,],[7,21,]),'multTag':([4,6,33,35,42,47,],[9,9,41,46,41,46,]),'people':([5,],[18,]),'person':([5,18,],[19,23,]),'families':([18,],[22,]),'family':([18,22,],[24,27,]),'conteudo':([30,],[34,]),'conteudoF':([32,],[36,]),'restPerson':([33,42,],[39,50,]),'restFams':([35,47,],[44,51,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -43,17 +43,18 @@ _lr_productions = [
   ('families -> family','families',1,'p_families','parser.py',114),
   ('family -> LEVEL POINTER FAM conteudoF BEGIN','family',5,'p_family','parser.py',118),
   ('family -> LEVEL POINTER FAM conteudoF END_FILE','family',5,'p_family','parser.py',119),
-  ('conteudoF -> conteudoF LEVEL restFams','conteudoF',3,'p_conteudo_fam','parser.py',130),
-  ('conteudoF -> LEVEL restFams','conteudoF',2,'p_conteudo_fam','parser.py',131),
-  ('conteudoF -> <empty>','conteudoF',0,'p_conteudo_fam','parser.py',132),
-  ('restFams -> CONTENT','restFams',1,'p_restFams_single','parser.py',141),
-  ('restFams -> multTag','restFams',1,'p_restFams_mult','parser.py',171),
-  ('multTag -> BIRTH','multTag',1,'p_multTag_birth','parser.py',179),
-  ('multTag -> CHAN','multTag',1,'p_multTag_change','parser.py',186),
-  ('multTag -> DEATH','multTag',1,'p_multTag_death','parser.py',193),
-  ('multTag -> CHR','multTag',1,'p_multTag_chr','parser.py',200),
-  ('multTag -> BURIAL','multTag',1,'p_multTag_burial','parser.py',207),
-  ('multTag -> MAR','multTag',1,'p_multTag_marriage','parser.py',214),
-  ('multTag -> GEDC','multTag',1,'p_multTag_gedc','parser.py',221),
-  ('multTag -> CONT','multTag',1,'p_multTag_cont','parser.py',225),
+  ('family -> LEVEL POINTER FAM BEGIN','family',4,'p_family','parser.py',120),
+  ('family -> LEVEL POINTER FAM END_FILE','family',4,'p_family','parser.py',121),
+  ('conteudoF -> conteudoF LEVEL restFams','conteudoF',3,'p_conteudo_fam','parser.py',132),
+  ('conteudoF -> LEVEL restFams','conteudoF',2,'p_conteudo_fam','parser.py',133),
+  ('restFams -> CONTENT','restFams',1,'p_restFams_single','parser.py',142),
+  ('restFams -> multTag','restFams',1,'p_restFams_mult','parser.py',172),
+  ('multTag -> BIRTH','multTag',1,'p_multTag_birth','parser.py',180),
+  ('multTag -> CHAN','multTag',1,'p_multTag_change','parser.py',187),
+  ('multTag -> DEATH','multTag',1,'p_multTag_death','parser.py',194),
+  ('multTag -> CHR','multTag',1,'p_multTag_chr','parser.py',201),
+  ('multTag -> BURIAL','multTag',1,'p_multTag_burial','parser.py',208),
+  ('multTag -> MAR','multTag',1,'p_multTag_marriage','parser.py',215),
+  ('multTag -> GEDC','multTag',1,'p_multTag_gedc','parser.py',222),
+  ('multTag -> CONT','multTag',1,'p_multTag_cont','parser.py',226),
 ]

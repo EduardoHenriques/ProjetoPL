@@ -43,25 +43,20 @@ def p_person_pointer_indi(p):
 	"""person :  LEVEL POINTER INDI conteudo BEGIN"""
 	global lista_pessoas
 	global pessoa_atual
+
 	id_int = p[2].replace("@", '')  # obter ID
+
 	p[0] = "<ID>" + p[2] + "</ID>"
 	print(p[0] + "\n")
-	pessoa_atual.add_id(p[2])  # associar ID á pessoa
-	lista_pessoas[id_int] = pessoa_atual  # guardar pessoa na lista
-	pessoa_atual = Pessoa()  # dar reset a pessoal atual
+
+	pessoa_atual.add_id(p[2])             # associar ID á pessoa
+	lista_pessoas[id_int] = pessoa_atual  # guardar pessoa no dicionario (ID->PESSOA)
+	pessoa_atual = Pessoa()               # dar reset a pessoal atual
 
 
 def p_conteudo_list(p):
 	"""conteudo		: conteudo LEVEL restPerson
 					| LEVEL restPerson  """
-	global pessoa_atual
-
-	#if len(p) == 4 :
-	#	p[0] = p[3][0]
-	#	pessoa_atual.currentLevel = int(p[2])
-	#else:
-	#	p[0] = p[2][0]
-	#	pessoa_atual.currentLevel = int(p[1])
 
 
 def p_restPerson_single(p):
@@ -116,7 +111,9 @@ def p_families(p):
 
 def p_family(p):
 	"""family : LEVEL POINTER FAM conteudoF BEGIN
-			  | LEVEL POINTER FAM conteudoF END_FILE"""
+			  | LEVEL POINTER FAM conteudoF END_FILE
+			  | LEVEL POINTER FAM BEGIN
+			  | LEVEL POINTER FAM END_FILE"""
 	global familiy_tree
 	global familia_atual
 
@@ -128,8 +125,7 @@ def p_family(p):
 
 def p_conteudo_fam(p):
 	"""conteudoF		: conteudoF LEVEL restFams
-						| LEVEL restFams
-						| """
+						| LEVEL restFams"""
 	global pessoa_atual
 	#if len(p) == 4:
 	#	pessoa_atual.currentLevel = int(p[2])
