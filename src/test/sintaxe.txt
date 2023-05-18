@@ -48,6 +48,7 @@
 1 DEAT
 2 DATE 22 JAN 1901
 2 PLAC Osborne House,Isle of Wight,England
+3 CONT >> I included all their titles, names, monikers in the notes.
 1 BURI
 2 PLAC Royal Mausoleum,Frogmore,Berkshire,England
 1 REFN 1

@@ -13,6 +13,10 @@ class Pessoa:
 	def add_line(self, linha):
 		self.linhas += '\n\t' + linha
 
+	def add_cont(self, linha, tag_atual):
+		back = len(tag_atual) + 3
+		self.linhas[:-back] += linha.replace('>>', '')
+
 	def add_id(self, ref):
 		self.id = ref
 		ID_line = "\t\t<ID>" + ref + "</ID>\t\n"
@@ -35,13 +39,9 @@ class Pessoa:
 			family = family_tree[famID]
 			if family.wife is not None:
 				self.linhas += "\n\t\t<mae>" + family.wife + "</mae>"
-				print("No mom?O_o")
 			if family.husband is not None:
 				self.linhas += "\n\t\t<pai>" + family.husband + "</pai>"
-				print("No dad?o_O")
 			if len(family.child_list) != 0:
 				for irmao in family.child_list:
 					if self.id != irmao:
 						self.linhas += "\n\t\t<irmao>" + irmao + "</irmao>"
-		else:
-			print("Key Error:")
