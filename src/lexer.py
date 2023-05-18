@@ -12,7 +12,9 @@ dic = dict()  # dicionario que associa o pointer ao nome da pessoa
 
 
 def t_error(t):
+	#print("erro" + t.value)
 	t.lexer.skip(1)
+
 
 
 #    states = [
@@ -25,7 +27,7 @@ tokens = [
 
 	"LEVEL",
 
-	"HEADER",
+	"HEAD",
 	"SOUR",  # approved system ID
 	"DEST",  #
 	"FILE",
@@ -65,21 +67,22 @@ tokens = [
 	"INDI",
 	"CHR",
 	"BEGIN",
-	"TRLR"
+	"TRLR",
+	"START_FILE",
+	"END_FILE"
 ]
 
 # expressoes tokens e estados
 
-t_ANY_ignore = r"\t\s\n"
+t_ANY_ignore = r"\t\s"
 
-t_BEGIN = r"\n(?=0)"
+t_BEGIN = r"\n(?=0\ @[IF])"
 t_TRLR = r"TRLR"
 
-t_ANY_POINTER = r"\@\w+[^@]?\@"
 t_ANY_REFN = r"REFN"
 
 t_ANY_COMM = r"COMM"
-t_ANY_HEADER = r"\sHEAD"
+t_ANY_HEAD = r"HEAD"
 t_ANY_CONT = r"CONT"
 t_ANY_DEST = r"DEST"
 t_ANY_FILE = r"FILE"
@@ -114,37 +117,26 @@ t_HUSBAND = r'HUSB'
 t_WIFE = r'WIFE'
 t_DIV = r'DIV'
 
-
-#def t_begin_pessoa(t):
-#	r"""INDI"""
-#	t.lexer.begin('pessoa')
+t_START_FILE = r"0\ HEAD"
+t_END_FILE = r"0\ TRLR"
 
 
-#def t_pessoa_end(t):
-#	r"""FAM"""
-#	t.lexer.begin('familia')
-
-
-#def t_familia_end(t):
-#	r"""TRLR"""
-#	t.lexer.begin('INITIAL')
-
-
-def t_LEVEL(t):
-	r"""\d"""
-	return t
+t_LEVEL = r"\d"
 
 
 def t_CONTENT(t):
-	r"""(?<=NAME|TITL|SEX\ |BIRT|DATE|PLAC|DEAT|BURI|REFN|FAMS|FAMC|WIFE|HUSB|CHIL|DIV\ |MARR)[^\n]+"""
+	r"""([A-Z]{3,15}|@[^IF][^@\n]+?@)[\ \t]([^\n]+)"""
 	return t
+
+
+t_ANY_POINTER = r"\@[IF][^@]+?\@"
 
 
 lexer = lex.lex()
 
 if __name__ == "__main__":
 
-	with open("test/sintaxe.txt",'r') as f:
+	with open("test/sintaxe.txt", 'r') as f:
 		lines = f.readlines()
 		for line in lines:
 			lexer.input(line)

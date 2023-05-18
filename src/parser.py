@@ -3,6 +3,7 @@ from pessoa import Pessoa
 from familia import Familia
 from lexer import tokens
 import os
+import re
 
 # contem todas as pessoas
 lista_pessoas = dict()
@@ -13,16 +14,26 @@ familia_atual = Familia()  # Familia vazia
 
 
 def p_gedcom(p):
-	"""gedcom  	: people families end"""
+	"""gedcom  	: START_FILE header BEGIN people families"""
 	print("li um ficheiro gedcom")
 
 
 # ---------------------------------------------------- PESSOA------------------------------------------------------------
 
 
+def p_header(p):
+	"""header : header LEVEL CONTENT
+			  | LEVEL CONTENT """
+	if len(p) == 4:
+		print(p[3])
+	else:
+		print(p[2])
+
+
 def p_people(p):
 	"""people : people person
 			  | person"""
+	print("ENTERED PEOPLE")
 
 
 def p_person_pointer_indi(p):
@@ -44,25 +55,28 @@ def p_conteudo_list(p):
 
 	if len(p) == 4:
 		p[0] = p[3][0]
-	# pessoa_atual.currentLevel = int(p[2])
+		pessoa_atual.currentLevel = int(p[2])
 	else:
 		p[0] = p[2][0]
-	# pessoa_atual.currentLevel = int(p[1])
+		pessoa_atual.currentLevel = int(p[1])
 
 
 def p_restPerson_single(p):
-	"""restPerson	: singTag CONTENT"""
+	"""restPerson	: CONTENT"""
 	global pessoa_atual
-	if str([p[1]][0]) == "NAME":        # tirar as barras ('/') do nome
-		p[2] = p[2].replace('/', '')
-
-	p[0] = '\t' + '<' + str([p[1]][0]) + '>' + p[2] + '</' + str([p[1]][0]) + '>'
+	tag = p[1].split(" ", 1)[0]
+	cont = p[1].split(" ", 1)[1]
+	p[0] = '\t' + '<' + tag + '>' + cont + '</' + tag + '>'
 	print(p[0])
+
+	if tag == "NAME":        # tirar as barras ('/') do nome
+		tag.replace('/', '')
+
 	if pessoa_atual is not None:
-		if str([p[1]][0]) == "FAMS":
-			pessoa_atual.add_fams(str(p[2]).strip())
-		elif str([p[1]][0]) == "FAMC":
-			pessoa_atual.add_famc(str(p[2]).strip())
+		if tag == "FAMS":
+			pessoa_atual.add_fams(cont.strip())
+		elif tag == "FAMC":
+			pessoa_atual.add_famc(cont.strip())
 		else:
 			pessoa_atual.add_line(p[0])
 	else:
@@ -83,7 +97,8 @@ def p_families(p):
 
 
 def p_family(p):
-	"""family : LEVEL POINTER FAM conteudoF BEGIN"""
+	"""family : LEVEL POINTER FAM conteudoF BEGIN
+			  | LEVEL POINTER FAM conteudoF END_FILE"""
 	global familiy_tree
 	global familia_atual
 
@@ -105,19 +120,26 @@ def p_conteudo_fam(p):
 
 
 def p_restFams_single(p):
-	"""restFams	: singTag CONTENT"""
+	"""restFams	: CONTENT"""
 	global familia_atual
 	global familiy_tree
-	p[0] = '\t' + '<' + str([p[1]][0]) + '>' + p[2] + '</' + str([p[1]][0]) + '>'
+
+	tag = p[1].split(" ", 1)[0]
+	cont = p[1].split(" ", 1)[1]
+
+	# escape do '&'
+	mod = re.sub(r'&', r'&amp;', cont)
+
+	p[0] = '\t' + '<' + tag + '>' + mod + '</' + tag + '>'
 	print(p[0])
 
 	if familia_atual is not None:
-		if str([p[1]][0]) == "WIFE":
-			familia_atual.add_wife(str(p[2]).strip())
-		elif str([p[1]][0]) == "HUSB":
-			familia_atual.add_husband(str(p[2]).strip())
-		elif str([p[1]][0]) == "CHIL":
-			familia_atual.add_child(str(p[2]).strip())
+		if tag == "WIFE":
+			familia_atual.add_wife(cont.strip())
+		elif tag == "HUSB":
+			familia_atual.add_husband(cont.strip())
+		elif tag == "CHIL":
+			familia_atual.add_child(cont.strip())
 
 		familia_atual.add_line(p[0])
 	else:
@@ -138,51 +160,6 @@ def p_end(p):
 
 
 # -------------------------------------------------- TAGS-------------------------------------------------------------
-
-
-def p_singTag_burial(p):
-	""" singTag		: BURIAL"""
-	p[0] = p[1]
-
-
-def p_singTag_name(p):
-	""" singTag		: NAME"""
-	p[0] = "Nome"
-
-
-def p_singTag_title(p):
-	""" singTag		: TITLE"""
-	p[0] = "Titulo"
-
-
-def p_singTag_sex(p):
-	""" singTag		: SEX"""
-	p[0] = "Sexo"
-
-
-def p_singTag_refn(p):
-	""" singTag		: REFN"""
-	p[0] = "Ref"
-
-
-def p_singTag_fams(p):
-	""" singTag		: FAMS"""
-	p[0] = p[1]
-
-
-def p_singTag_famc(p):
-	""" singTag		: FAMC"""
-	p[0] = p[1]
-
-
-def p_singTag_date(p):
-	""" singTag		: DATE"""
-	p[0] = "Data" + tipo
-
-
-def p_singTag_place(p):
-	"""singTag		: PLACE"""
-	p[0] = "Local" + tipo
 
 
 def p_multTag_birth(p):
@@ -220,27 +197,14 @@ def p_multTag_marriage(p):
 	tipo = p[0]
 
 
+#def p_multTag_fim(p):
+	#"""multTag		: TRLR"""
+	#print("chegou ao fim")
+	#p[0] = "FIM"
+	#global tipo
+	#tipo = p[0]
+
 # tags da family tree
-
-
-def p_singTag_wife(p):
-	""" singTag		: WIFE"""
-	p[0] = p[1]
-
-
-def p_singTag_div(p):
-	""" singTag		: DIV"""
-	p[0] = p[1]
-
-
-def p_singTag_husband(p):
-	""" singTag		: HUSBAND"""
-	p[0] = p[1]
-
-
-def p_singTag_child(p):
-	""" singTag		: CHILD"""
-	p[0] = p[1]
 
 
 def p_error(p):
@@ -265,15 +229,14 @@ with open("test/sintaxe.txt", encoding="utf-8") as f:
 print('%' * 50)
 
 
-with open("test/output.txt", "w") as f:
+with open("test/output.xml", "w") as f:
+	f.write("<genoa>\n")
 	for elem in lista_pessoas.keys():
 		p = lista_pessoas[elem]
 		p.lookup(familiy_tree, p.famc)
-		f.write("<pessoa>" + p.__str__() + "</pessoa>\n")
+		f.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
 	for familia in familiy_tree.keys():
 		fam = familiy_tree[familia]
-		f.write("<familia>" + fam.__str__() + "</familia>\n")
+		f.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
 	print("End")
-	for idF in familiy_tree.keys():
-		fam = familiy_tree[idF]
-		print(fam.child_list)
+	f.write("</genoa>\n")

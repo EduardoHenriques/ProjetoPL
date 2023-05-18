@@ -9,11 +9,11 @@ class Familia:
 
     def add_id(self, ref):
         self.id = ref
-        ID_line = "\t<ID>" + ref + "<ID>\t\n"
+        ID_line = "\t\t<ID>" + ref + "</ID>\t\n"
         self.linhas.insert(1, ID_line)
 
     def add_line(self, l):
-        self.linhas += '\n' + l
+        self.linhas += '\n\t' + l
 
     def __str__(self):
         res = ""
