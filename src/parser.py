@@ -37,7 +37,6 @@ def p_header_rest(p):
 def p_people(p):
 	"""people : people person
 			  | person"""
-	print("ENTERED PEOPLE")
 
 
 def p_person_pointer_indi(p):
@@ -46,7 +45,7 @@ def p_person_pointer_indi(p):
 	global pessoa_atual
 	id_int = p[2].replace("@", '')  # obter ID
 	p[0] = "<ID>" + p[2] + "</ID>"
-	#print(p[0])
+	print(p[0] + "\n")
 	pessoa_atual.add_id(p[2])  # associar ID á pessoa
 	lista_pessoas[id_int] = pessoa_atual  # guardar pessoa na lista
 	pessoa_atual = Pessoa()  # dar reset a pessoal atual
@@ -75,6 +74,8 @@ def p_restPerson_single(p):
 	# substitui a tag. Exemplo: muda_tag("DATE", "Nasc") = "DataNasc"
 	#                           muda_tag("NAME", tipo_irrelevante) = "Nome"
 
+	print(f"{tag} -> {muda_tag(tag, tipo, pessoa_atual.currentLevel)}")
+
 	tag = muda_tag(tag, tipo, pessoa_atual.currentLevel)
 	cont = p[1].split(" ", 1)[1]
 
@@ -84,7 +85,7 @@ def p_restPerson_single(p):
 	# nao escrevemos notas
 	if pessoa_atual is not None:
 		p[0] = '\t' + '<' + tag + '>' + cont + '</' + tag + '>'
-		print(p[0])
+		print(p[0] + "\n")
 		if tag == "FAMS":
 			pessoa_atual.add_fams(cont.strip())
 		elif tag == "FAMC":
@@ -130,7 +131,6 @@ def p_conteudo_fam(p):
 						| LEVEL restFams
 						| """
 	global pessoa_atual
-
 	#if len(p) == 4:
 	#	pessoa_atual.currentLevel = int(p[2])
 	#else:
@@ -145,14 +145,14 @@ def p_restFams_single(p):
 	tag = p[1].split(" ", 1)[0]
 	cont = p[1].split(" ", 1)[1]
 
-	print(tag, muda_tag(tag, tipo, pessoa_atual.currentLevel))
+	print(f"{tag} -> {muda_tag(tag, tipo, pessoa_atual.currentLevel)}")
 	tag = muda_tag(tag, tipo, pessoa_atual.currentLevel)
 
 	# escape do '&'
 	mod = re.sub(r'&', r'&amp;', cont)
 
 	p[0] = '\t' + '<' + tag + '>' + mod + '</' + tag + '>'
-	print(p[0])
+	print(p[0] + "\n")
 
 	if familia_atual is not None:
 		if tag == "Mulher":
@@ -237,108 +237,84 @@ def p_error(p):
 parser = yacc.yacc()
 parser.success = True
 
-# FAMILIAS BIBLIA
 
-with open("test/familias_biblia.txt", encoding="utf-8") as f:
-	lines = f.read()
+def gedcomToXML():
+	menuStr = '''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PROCESSAMENTO DE LINGUAGENS 22-23 %
+%                                   %
+%     CONVERSOR GEDCOM -> XML       %  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+                          
+Selecione a opção:
+
+1 => FAMÍLIAS DA BIBLIA
+2 => FAMÍLIAS ROMANAS                           
+3 => FAMÍLIAS GREGAS                           
+4 => FAMÍLIAS REAIS
+                        
+5 => SAIR
+'''
+
+	errorMsg = '''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           OPCAO INVALIDA!!!       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+'''
+
+	opt = None
+
+	while opt != 5:
+		opt = input(menuStr)
+		match opt:
+			case "1":
+				parse("test/familias_biblia.ged.txt", "output/output_Biblia.xml", opt)
+			case "2":
+				parse("test/familias_romanas.ged.txt", "output/output_Romanas.xml", opt)
+			case "3":
+				parse("test/familias_gregas.ged.txt", "output/output_Gregas.xml", opt)
+			case "4":
+				parse("test/familias_reais.ged.txt", "output/output_Reais.xml", opt)
+			case "5":
+				print("TERM...")
+				exit()
+			case _:
+				print(errorMsg)
+				opt = None
+
+
+def parse(gedcom_path, output_path, opt):
+
+	success_msg = f'''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   OPCAO  {opt} EFETUADA COM SUCESSO     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+'''
+
+	# dar parse ao ficheiro
+	f_gedcom = open(gedcom_path, encoding="utf-8")
+	lines = f_gedcom.read()
 	parser.parse(lines)
-	if parser.success:
-		print("Yes")
-	else:
-		print("No")
-	print("End")
+	f_gedcom.close()
+	print('%' * 50)
 
-print('%' * 50)
+	# colocar as tags <genoa></genoa> dentro do ficheiro completo, <pessoa></pessoa> em torno de cada pessoa
+	# e as tags <familia></familia> em torno de cada familia enquanto adiciona
+	# as tags <pai></pai> e <mae></mae> ás pessoas que deu parse
 
-
-with open("output/output_Biblia.xml", "w") as f:
-	f.write("<genoa>\n")
+	f_xml = open(output_path, "w")
+	f_xml.write("<genoa>\n")
 	for elem in lista_pessoas.keys():
 		p = lista_pessoas[elem]
 		p.lookup(familiy_tree, p.famc)
-		f.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
+		f_xml.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
 	for familia in familiy_tree.keys():
 		fam = familiy_tree[familia]
-		f.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
-	print("End")
-	f.write("</genoa>\n")
+		f_xml.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
+	f_xml.write("</genoa>\n")
 
-# FAMILIAS REAIS
-
-with open("test/familias_reais.txt", encoding="utf-8") as f:
-	lines = f.read()
-	parser.parse(lines)
-	if parser.success:
-		print("Yes")
-	else:
-		print("No")
-	print("End")
-
-print('%' * 50)
+	print(success_msg)
 
 
-with open("output/output_Reais.xml", "w") as f:
-	f.write("<genoa>\n")
-	for elem in lista_pessoas.keys():
-		p = lista_pessoas[elem]
-		p.lookup(familiy_tree, p.famc)
-		f.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
-	for familia in familiy_tree.keys():
-		fam = familiy_tree[familia]
-		f.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
-	print("End")
-	f.write("</genoa>\n")
-
-
-# FAMILIAS ROMANAS
-
-with open("test/familias_romanas.txt", encoding="utf-8") as f:
-	lines = f.read()
-	parser.parse(lines)
-	if parser.success:
-		print("Yes")
-	else:
-		print("No")
-	print("End")
-
-print('%' * 50)
-
-
-with open("output/output_Romanas.xml", "w") as f:
-	f.write("<genoa>\n")
-	for elem in lista_pessoas.keys():
-		p = lista_pessoas[elem]
-		p.lookup(familiy_tree, p.famc)
-		f.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
-	for familia in familiy_tree.keys():
-		fam = familiy_tree[familia]
-		f.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
-	print("End")
-	f.write("</genoa>\n")
-
-
-# FAMILIAS GREGAS
-
-with open("test/familias_gregas.txt", encoding="utf-8") as f:
-	lines = f.read()
-	parser.parse(lines)
-	if parser.success:
-		print("Yes")
-	else:
-		print("No")
-	print("End")
-
-print('%' * 50)
-
-
-with open("output/output_Gregas.xml", "w") as f:
-	f.write("<genoa>\n")
-	for elem in lista_pessoas.keys():
-		p = lista_pessoas[elem]
-		p.lookup(familiy_tree, p.famc)
-		f.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
-	for familia in familiy_tree.keys():
-		fam = familiy_tree[familia]
-		f.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
-	print("End")
-	f.write("</genoa>\n")
+if __name__ == "__main__":
+	gedcomToXML()

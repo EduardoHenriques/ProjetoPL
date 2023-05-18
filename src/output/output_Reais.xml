@@ -31748,6 +31748,24 @@
 		<Mulher>@I74@</Mulher>
 	</familia>
 	<familia>
+		<ID>F139</ID>	
+		<Marido>@I405@</Marido>
+		<Mulher>@I76@</Mulher>
+		<Descendente>@I439@</Descendente>
+		<Descendente>@I234@</Descendente>
+		<Descendente>@I233@</Descendente>
+		<Descendente>@I232@</Descendente>
+		<Descendente>@I231@</Descendente>
+		<Descendente>@I230@</Descendente>
+		<DataCasamento>27 OCT 1889</DataCasamento>
+		<LocalCasamento>Athens,Greece</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F140</ID>	
+		<Marido>@I406@</Marido>
+		<Mulher>@I78@</Mulher>
+	</familia>
+	<familia>
 		<ID>F141</ID>	
 		<Marido>@I129@</Marido>
 		<Mulher>@I407@</Mulher>
@@ -31822,6 +31840,22 @@
 		<Descendente>@I594@</Descendente>
 		<DataCasamento>       1935</DataCasamento>
 		<LocalCasamento>Rome,,Italy</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F150</ID>	
+		<Marido>@I439@</Marido>
+		<Mulher>@I437@</Mulher>
+		<Divorcio>Y</Divorcio>
+		<DataCasamento>27 FEB 1921</DataCasamento>
+		<LocalCasamento>Bucharest,Romania</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F151</ID>	
+		<Marido>@I440@</Marido>
+		<Mulher>@I436@</Mulher>
+		<Descendente>@I475@</Descendente>
+		<Descendente>@I874@</Descendente>
+		<Descendente>@I875@</Descendente>
 	</familia>
 	<familia>
 		<ID>F152</ID>	
@@ -32013,6 +32047,30 @@
 		<Descendente>@I501@</Descendente>
 	</familia>
 	<familia>
+		<ID>F176</ID>	
+		<Marido>@I102@</Marido>
+		<Mulher>@I502@</Mulher>
+		<Descendente>@I503@</Descendente>
+		<Descendente>@I504@</Descendente>
+	</familia>
+	<familia>
+		<ID>F177</ID>	
+		<Marido>@I505@</Marido>
+		<Mulher>@I500@</Mulher>
+		<Descendente>@I506@</Descendente>
+	</familia>
+	<familia>
+		<ID>F178</ID>	
+		<Marido>@I507@</Marido>
+		<Mulher>@I501@</Mulher>
+		<Descendente>@I508@</Descendente>
+	</familia>
+	<familia>
+		<ID>F179</ID>	
+		<Marido>@I162@</Marido>
+		<Mulher>@I510@</Mulher>
+	</familia>
+	<familia>
 		<ID>F180</ID>	
 		<Marido>@I418@</Marido>
 		<Mulher>@I1682@</Mulher>
@@ -32144,6 +32202,80 @@
 		<DataCasamento>       1913</DataCasamento>
 	</familia>
 	<familia>
+		<ID>F199</ID>	
+		<Marido>@I553@</Marido>
+		<Mulher>@I554@</Mulher>
+		<Descendente>@I555@</Descendente>
+		<Divorcio>Y</Divorcio>
+		<DataCasamento>14 JUL 1765</DataCasamento>
+		<LocalCasamento>Charlottenburg</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F200</ID>	
+		<Marido>@I553@</Marido>
+		<Mulher>@I556@</Mulher>
+		<Descendente>@I162@</Descendente>
+		<Descendente>@I557@</Descendente>
+		<Descendente>@I558@</Descendente>
+		<Descendente>@I559@</Descendente>
+		<Descendente>@I560@</Descendente>
+		<Descendente>@I561@</Descendente>
+		<Descendente>@I562@</Descendente>
+		<Descendente>@I563@</Descendente>
+		<DataCasamento>14 JUL 1769</DataCasamento>
+		<LocalCasamento>Charlottenburg</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F201</ID>	
+		<Marido>@I558@</Marido>
+		<Mulher>@I248@</Mulher>
+		<DataCasamento>29 AUG 1815</DataCasamento>
+		<LocalCasamento>London,England</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F202</ID>	
+		<Marido>@I565@</Marido>
+		<Mulher>@I559@</Mulher>
+		<Descendente>@I652@</Descendente>
+		<Descendente>@I653@</Descendente>
+		<Descendente>@I1681@</Descendente>
+		<Descendente>@I1682@</Descendente>
+		<DataCasamento> 1 OCT 1791</DataCasamento>
+		<LocalCasamento>Berlin,Germany</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F203</ID>	
+		<Marido>@I566@</Marido>
+		<Mulher>@I561@</Mulher>
+	</familia>
+	<familia>
+		<ID>F204</ID>	
+		<Marido>@I563@</Marido>
+		<Mulher>@I567@</Mulher>
+	</familia>
+	<familia>
+		<ID>F205</ID>	
+		<Marido>@I568@</Marido>
+		<Mulher>@I569@</Mulher>
+		<Descendente>@I553@</Descendente>
+		<Descendente>@I570@</Descendente>
+		<Descendente>@I571@</Descendente>
+		<Descendente>@I572@</Descendente>
+	</familia>
+	<familia>
+		<ID>F206</ID>	
+		<Marido>@I573@</Marido>
+		<Mulher>@I571@</Mulher>
+	</familia>
+	<familia>
+		<ID>F207</ID>	
+		<Marido>@I574@</Marido>
+		<Mulher>@I575@</Mulher>
+		<Descendente>@I576@</Descendente>
+		<Descendente>@I485@</Descendente>
+		<DataCasamento>       1760</DataCasamento>
+	</familia>
+	<familia>
 		<ID>F208</ID>	
 		<Marido>@I576@</Marido>
 		<Mulher>@I577@</Mulher>
@@ -32155,6 +32287,151 @@
 		<Mulher>@I579@</Mulher>
 		<Descendente>@I580@</Descendente>
 		<Descendente>@I459@</Descendente>
+	</familia>
+	<familia>
+		<ID>F210</ID>	
+		<Marido>@I580@</Marido>
+		<Mulher>@I581@</Mulher>
+		<Descendente>@I582@</Descendente>
+	</familia>
+	<familia>
+		<ID>F211</ID>	
+		<Marido>@I582@</Marido>
+		<Mulher>@I583@</Mulher>
+		<Descendente>@I584@</Descendente>
+	</familia>
+	<familia>
+		<ID>F212</ID>	
+		<Marido>@I585@</Marido>
+		<Mulher>@I584@</Mulher>
+		<Descendente>@I586@</Descendente>
+	</familia>
+	<familia>
+		<ID>F213</ID>	
+		<Marido>@I158@</Marido>
+		<Mulher>@I97@</Mulher>
+		<Descendente>@I895@</Descendente>
+		<Descendente>@I528@</Descendente>
+		<Descendente>@I588@</Descendente>
+		<DataCasamento>       1905</DataCasamento>
+		<LocalCasamento>Tegernsee,,Bavaria</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F214</ID>	
+		<Marido>@I588@</Marido>
+		<Mulher>@I589@</Mulher>
+		<Descendente>@I899@</Descendente>
+		<DataCasamento>       1948</DataCasamento>
+		<LocalCasamento>,Switzerland</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F215</ID>	
+		<Marido>@I597@</Marido>
+		<Mulher>@I598@</Mulher>
+		<Descendente>@I2829@</Descendente>
+		<Descendente>@I451@</Descendente>
+		<Descendente>@I599@</Descendente>
+		<Descendente>@I2738@</Descendente>
+		<DataCasamento>       1897</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F216</ID>	
+		<Marido>@I600@</Marido>
+		<Mulher>@I599@</Mulher>
+		<Descendente>@I1123@</Descendente>
+		<Descendente>@I601@</Descendente>
+		<Descendente>@I1124@</Descendente>
+		<DataCasamento>10 NOV 1926</DataCasamento>
+		<LocalCasamento>Brussels,Belgium</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F217</ID>	
+		<Marido>@I445@</Marido>
+		<Mulher>@I602@</Mulher>
+		<Descendente>@I2526@</Descendente>
+		<Descendente>@I2527@</Descendente>
+		<Descendente>@I2528@</Descendente>
+		<Descendente>@I2529@</Descendente>
+		<Descendente>@I603@</Descendente>
+		<DataCasamento>       1932</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F218</ID>	
+		<Marido>@I604@</Marido>
+		<Mulher>@I605@</Mulher>
+		<Descendente>@I606@</Descendente>
+		<Descendente>@I71@</Descendente>
+		<Descendente>@I2697@</Descendente>
+		<Descendente>@I1664@</Descendente>
+		<Descendente>@I598@</Descendente>
+		<Descendente>@I1665@</Descendente>
+		<Descendente>@I1666@</Descendente>
+		<Descendente>@I1667@</Descendente>
+	</familia>
+	<familia>
+		<ID>F219</ID>	
+		<Marido>@I606@</Marido>
+		<Mulher>@I607@</Mulher>
+		<Descendente>@I608@</Descendente>
+		<Descendente>@I1671@</Descendente>
+		<DataCasamento>       1898</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F220</ID>	
+		<Marido>@I603@</Marido>
+		<Mulher>@I1612@</Mulher>
+		<Descendente>@I2446@</Descendente>
+		<Descendente>@I2447@</Descendente>
+		<Descendente>@I2729@</Descendente>
+		<DataCasamento>19 JUN 1976</DataCasamento>
+		<LocalCasamento>Stockholm,Sweden</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F221</ID>	
+		<Marido>@I611@</Marido>
+		<Mulher>@I612@</Mulher>
+		<Descendente>@I613@</Descendente>
+		<Descendente>@I614@</Descendente>
+	</familia>
+	<familia>
+		<ID>F222</ID>	
+		<Marido>@I615@</Marido>
+		<Mulher>@I614@</Mulher>
+		<Descendente>@I616@</Descendente>
+	</familia>
+	<familia>
+		<ID>F223</ID>	
+		<Marido>@I616@</Marido>
+		<Mulher>@I617@</Mulher>
+		<Descendente>@I618@</Descendente>
+		<Descendente>@I619@</Descendente>
+		<DataCasamento>       1709</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F224</ID>	
+		<Marido>@I620@</Marido>
+		<Mulher>@I619@</Mulher>
+		<Descendente>@I621@</Descendente>
+		<DataCasamento>       1727</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F225</ID>	
+		<Marido>@I621@</Marido>
+		<Mulher>@I622@</Mulher>
+		<Descendente>@I623@</Descendente>
+	</familia>
+	<familia>
+		<ID>F226</ID>	
+		<Marido>@I623@</Marido>
+		<Mulher>@I624@</Mulher>
+		<Descendente>@I625@</Descendente>
+		<Descendente>@I626@</Descendente>
+	</familia>
+	<familia>
+		<ID>F227</ID>	
+		<Marido>@I625@</Marido>
+		<Mulher>@I627@</Mulher>
+		<Descendente>@I628@</Descendente>
 	</familia>
 	<familia>
 		<ID>F228</ID>	
@@ -32686,6 +32963,12 @@
 		<Descendente>@I394@</Descendente>
 	</familia>
 	<familia>
+		<ID>F294</ID>	
+		<Marido>@I799@</Marido>
+		<Mulher>@I800@</Mulher>
+		<Descendente>@I395@</Descendente>
+	</familia>
+	<familia>
 		<ID>F295</ID>	
 		<Marido>@I802@</Marido>
 		<Mulher>@I319@</Mulher>
@@ -32708,6 +32991,57 @@
 		<ID>F298</ID>	
 		<Marido>@I804@</Marido>
 		<Mulher>@I805@</Mulher>
+	</familia>
+	<familia>
+		<ID>F299</ID>	
+		<Marido>@I2984@</Marido>
+		<Mulher>@I806@</Mulher>
+		<Descendente>@I243@</Descendente>
+		<Divorcio>Y</Divorcio>
+		<DataCasamento>23 APR 1927</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F300</ID>	
+		<Marido>@I807@</Marido>
+		<Mulher>@I241@</Mulher>
+		<Descendente>@I808@</Descendente>
+		<DataCasamento>   MAR 1978</DataCasamento>
+		<LocalCasamento>,London,England</LocalCasamento>
+	</familia>
+	<familia>
+		<ID>F301</ID>	
+		<Marido>@I809@</Marido>
+		<Mulher>@I240@</Mulher>
+		<DataCasamento>   MAY 1980</DataCasamento>
+	</familia>
+	<familia>
+		<ID>F302</ID>	
+		<Marido>@I810@</Marido>
+		<Descendente>@I807@</Descendente>
+	</familia>
+	<familia>
+		<ID>F303</ID>	
+		<Marido>@I811@</Marido>
+		<Mulher>@I812@</Mulher>
+		<Descendente>@I813@</Descendente>
+		<Descendente>@I169@</Descendente>
+	</familia>
+	<familia>
+		<ID>F304</ID>	
+		<Marido>@I814@</Marido>
+		<Mulher>@I2947@</Mulher>
+		<Descendente>@I811@</Descendente>
+	</familia>
+	<familia>
+		<ID>F305</ID>	
+		<Marido>@I815@</Marido>
+		<Descendente>@I814@</Descendente>
+	</familia>
+	<familia>
+		<ID>F306</ID>	
+		<Marido>@I816@</Marido>
+		<Mulher>@I817@</Mulher>
+		<Descendente>@I815@</Descendente>
 	</familia>
 	<familia>
 		<ID>F307</ID>	
@@ -33096,340 +33430,6 @@
 		<Descendente>@I949@</Descendente>
 		<Descendente>@I950@</Descendente>
 		<DataCasamento>       1981</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F139</ID>	
-		<Marido>@I405@</Marido>
-		<Mulher>@I76@</Mulher>
-		<Descendente>@I439@</Descendente>
-		<Descendente>@I234@</Descendente>
-		<Descendente>@I233@</Descendente>
-		<Descendente>@I232@</Descendente>
-		<Descendente>@I231@</Descendente>
-		<Descendente>@I230@</Descendente>
-		<DataCasamento>27 OCT 1889</DataCasamento>
-		<LocalCasamento>Athens,Greece</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F140</ID>	
-		<Marido>@I406@</Marido>
-		<Mulher>@I78@</Mulher>
-	</familia>
-	<familia>
-		<ID>F150</ID>	
-		<Marido>@I439@</Marido>
-		<Mulher>@I437@</Mulher>
-		<Divorcio>Y</Divorcio>
-		<DataCasamento>27 FEB 1921</DataCasamento>
-		<LocalCasamento>Bucharest,Romania</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F151</ID>	
-		<Marido>@I440@</Marido>
-		<Mulher>@I436@</Mulher>
-		<Descendente>@I475@</Descendente>
-		<Descendente>@I874@</Descendente>
-		<Descendente>@I875@</Descendente>
-	</familia>
-	<familia>
-		<ID>F176</ID>	
-		<Marido>@I102@</Marido>
-		<Mulher>@I502@</Mulher>
-		<Descendente>@I503@</Descendente>
-		<Descendente>@I504@</Descendente>
-	</familia>
-	<familia>
-		<ID>F177</ID>	
-		<Marido>@I505@</Marido>
-		<Mulher>@I500@</Mulher>
-		<Descendente>@I506@</Descendente>
-	</familia>
-	<familia>
-		<ID>F178</ID>	
-		<Marido>@I507@</Marido>
-		<Mulher>@I501@</Mulher>
-		<Descendente>@I508@</Descendente>
-	</familia>
-	<familia>
-		<ID>F179</ID>	
-		<Marido>@I162@</Marido>
-		<Mulher>@I510@</Mulher>
-	</familia>
-	<familia>
-		<ID>F199</ID>	
-		<Marido>@I553@</Marido>
-		<Mulher>@I554@</Mulher>
-		<Descendente>@I555@</Descendente>
-		<Divorcio>Y</Divorcio>
-		<DataCasamento>14 JUL 1765</DataCasamento>
-		<LocalCasamento>Charlottenburg</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F200</ID>	
-		<Marido>@I553@</Marido>
-		<Mulher>@I556@</Mulher>
-		<Descendente>@I162@</Descendente>
-		<Descendente>@I557@</Descendente>
-		<Descendente>@I558@</Descendente>
-		<Descendente>@I559@</Descendente>
-		<Descendente>@I560@</Descendente>
-		<Descendente>@I561@</Descendente>
-		<Descendente>@I562@</Descendente>
-		<Descendente>@I563@</Descendente>
-		<DataCasamento>14 JUL 1769</DataCasamento>
-		<LocalCasamento>Charlottenburg</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F201</ID>	
-		<Marido>@I558@</Marido>
-		<Mulher>@I248@</Mulher>
-		<DataCasamento>29 AUG 1815</DataCasamento>
-		<LocalCasamento>London,England</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F202</ID>	
-		<Marido>@I565@</Marido>
-		<Mulher>@I559@</Mulher>
-		<Descendente>@I652@</Descendente>
-		<Descendente>@I653@</Descendente>
-		<Descendente>@I1681@</Descendente>
-		<Descendente>@I1682@</Descendente>
-		<DataCasamento> 1 OCT 1791</DataCasamento>
-		<LocalCasamento>Berlin,Germany</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F203</ID>	
-		<Marido>@I566@</Marido>
-		<Mulher>@I561@</Mulher>
-	</familia>
-	<familia>
-		<ID>F204</ID>	
-		<Marido>@I563@</Marido>
-		<Mulher>@I567@</Mulher>
-	</familia>
-	<familia>
-		<ID>F205</ID>	
-		<Marido>@I568@</Marido>
-		<Mulher>@I569@</Mulher>
-		<Descendente>@I553@</Descendente>
-		<Descendente>@I570@</Descendente>
-		<Descendente>@I571@</Descendente>
-		<Descendente>@I572@</Descendente>
-	</familia>
-	<familia>
-		<ID>F206</ID>	
-		<Marido>@I573@</Marido>
-		<Mulher>@I571@</Mulher>
-	</familia>
-	<familia>
-		<ID>F207</ID>	
-		<Marido>@I574@</Marido>
-		<Mulher>@I575@</Mulher>
-		<Descendente>@I576@</Descendente>
-		<Descendente>@I485@</Descendente>
-		<DataCasamento>       1760</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F210</ID>	
-		<Marido>@I580@</Marido>
-		<Mulher>@I581@</Mulher>
-		<Descendente>@I582@</Descendente>
-	</familia>
-	<familia>
-		<ID>F211</ID>	
-		<Marido>@I582@</Marido>
-		<Mulher>@I583@</Mulher>
-		<Descendente>@I584@</Descendente>
-	</familia>
-	<familia>
-		<ID>F212</ID>	
-		<Marido>@I585@</Marido>
-		<Mulher>@I584@</Mulher>
-		<Descendente>@I586@</Descendente>
-	</familia>
-	<familia>
-		<ID>F213</ID>	
-		<Marido>@I158@</Marido>
-		<Mulher>@I97@</Mulher>
-		<Descendente>@I895@</Descendente>
-		<Descendente>@I528@</Descendente>
-		<Descendente>@I588@</Descendente>
-		<DataCasamento>       1905</DataCasamento>
-		<LocalCasamento>Tegernsee,,Bavaria</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F214</ID>	
-		<Marido>@I588@</Marido>
-		<Mulher>@I589@</Mulher>
-		<Descendente>@I899@</Descendente>
-		<DataCasamento>       1948</DataCasamento>
-		<LocalCasamento>,Switzerland</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F215</ID>	
-		<Marido>@I597@</Marido>
-		<Mulher>@I598@</Mulher>
-		<Descendente>@I2829@</Descendente>
-		<Descendente>@I451@</Descendente>
-		<Descendente>@I599@</Descendente>
-		<Descendente>@I2738@</Descendente>
-		<DataCasamento>       1897</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F216</ID>	
-		<Marido>@I600@</Marido>
-		<Mulher>@I599@</Mulher>
-		<Descendente>@I1123@</Descendente>
-		<Descendente>@I601@</Descendente>
-		<Descendente>@I1124@</Descendente>
-		<DataCasamento>10 NOV 1926</DataCasamento>
-		<LocalCasamento>Brussels,Belgium</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F217</ID>	
-		<Marido>@I445@</Marido>
-		<Mulher>@I602@</Mulher>
-		<Descendente>@I2526@</Descendente>
-		<Descendente>@I2527@</Descendente>
-		<Descendente>@I2528@</Descendente>
-		<Descendente>@I2529@</Descendente>
-		<Descendente>@I603@</Descendente>
-		<DataCasamento>       1932</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F218</ID>	
-		<Marido>@I604@</Marido>
-		<Mulher>@I605@</Mulher>
-		<Descendente>@I606@</Descendente>
-		<Descendente>@I71@</Descendente>
-		<Descendente>@I2697@</Descendente>
-		<Descendente>@I1664@</Descendente>
-		<Descendente>@I598@</Descendente>
-		<Descendente>@I1665@</Descendente>
-		<Descendente>@I1666@</Descendente>
-		<Descendente>@I1667@</Descendente>
-	</familia>
-	<familia>
-		<ID>F219</ID>	
-		<Marido>@I606@</Marido>
-		<Mulher>@I607@</Mulher>
-		<Descendente>@I608@</Descendente>
-		<Descendente>@I1671@</Descendente>
-		<DataCasamento>       1898</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F220</ID>	
-		<Marido>@I603@</Marido>
-		<Mulher>@I1612@</Mulher>
-		<Descendente>@I2446@</Descendente>
-		<Descendente>@I2447@</Descendente>
-		<Descendente>@I2729@</Descendente>
-		<DataCasamento>19 JUN 1976</DataCasamento>
-		<LocalCasamento>Stockholm,Sweden</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F221</ID>	
-		<Marido>@I611@</Marido>
-		<Mulher>@I612@</Mulher>
-		<Descendente>@I613@</Descendente>
-		<Descendente>@I614@</Descendente>
-	</familia>
-	<familia>
-		<ID>F222</ID>	
-		<Marido>@I615@</Marido>
-		<Mulher>@I614@</Mulher>
-		<Descendente>@I616@</Descendente>
-	</familia>
-	<familia>
-		<ID>F223</ID>	
-		<Marido>@I616@</Marido>
-		<Mulher>@I617@</Mulher>
-		<Descendente>@I618@</Descendente>
-		<Descendente>@I619@</Descendente>
-		<DataCasamento>       1709</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F224</ID>	
-		<Marido>@I620@</Marido>
-		<Mulher>@I619@</Mulher>
-		<Descendente>@I621@</Descendente>
-		<DataCasamento>       1727</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F225</ID>	
-		<Marido>@I621@</Marido>
-		<Mulher>@I622@</Mulher>
-		<Descendente>@I623@</Descendente>
-	</familia>
-	<familia>
-		<ID>F226</ID>	
-		<Marido>@I623@</Marido>
-		<Mulher>@I624@</Mulher>
-		<Descendente>@I625@</Descendente>
-		<Descendente>@I626@</Descendente>
-	</familia>
-	<familia>
-		<ID>F227</ID>	
-		<Marido>@I625@</Marido>
-		<Mulher>@I627@</Mulher>
-		<Descendente>@I628@</Descendente>
-	</familia>
-	<familia>
-		<ID>F294</ID>	
-		<Marido>@I799@</Marido>
-		<Mulher>@I800@</Mulher>
-		<Descendente>@I395@</Descendente>
-	</familia>
-	<familia>
-		<ID>F299</ID>	
-		<Marido>@I2984@</Marido>
-		<Mulher>@I806@</Mulher>
-		<Descendente>@I243@</Descendente>
-		<Divorcio>Y</Divorcio>
-		<DataCasamento>23 APR 1927</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F300</ID>	
-		<Marido>@I807@</Marido>
-		<Mulher>@I241@</Mulher>
-		<Descendente>@I808@</Descendente>
-		<DataCasamento>   MAR 1978</DataCasamento>
-		<LocalCasamento>,London,England</LocalCasamento>
-	</familia>
-	<familia>
-		<ID>F301</ID>	
-		<Marido>@I809@</Marido>
-		<Mulher>@I240@</Mulher>
-		<DataCasamento>   MAY 1980</DataCasamento>
-	</familia>
-	<familia>
-		<ID>F302</ID>	
-		<Marido>@I810@</Marido>
-		<Descendente>@I807@</Descendente>
-	</familia>
-	<familia>
-		<ID>F303</ID>	
-		<Marido>@I811@</Marido>
-		<Mulher>@I812@</Mulher>
-		<Descendente>@I813@</Descendente>
-		<Descendente>@I169@</Descendente>
-	</familia>
-	<familia>
-		<ID>F304</ID>	
-		<Marido>@I814@</Marido>
-		<Mulher>@I2947@</Mulher>
-		<Descendente>@I811@</Descendente>
-	</familia>
-	<familia>
-		<ID>F305</ID>	
-		<Marido>@I815@</Marido>
-		<Descendente>@I814@</Descendente>
-	</familia>
-	<familia>
-		<ID>F306</ID>	
-		<Marido>@I816@</Marido>
-		<Mulher>@I817@</Mulher>
-		<Descendente>@I815@</Descendente>
 	</familia>
 	<familia>
 		<ID>F360</ID>	
