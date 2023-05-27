@@ -311,13 +311,23 @@ def parse(gedcom_path, output_path, opt):
 
 	f_xml = open(output_path, "w")
 	f_xml.write("<genoa>\n")
+
+	f_xml.write("\t<pessoas>\n")
+
 	for elem in lista_pessoas.keys():
 		p = lista_pessoas[elem]
 		p.lookup(familiy_tree, p.famc)
 		f_xml.write("\t<pessoa>" + p.__str__() + "\t</pessoa>\n")
+
+	f_xml.write("\t</pessoas>\n")
+	f_xml.write("\t<familias>\n")
+
 	for familia in familiy_tree.keys():
 		fam = familiy_tree[familia]
 		f_xml.write("\t<familia>" + fam.__str__() + "\t</familia>\n")
+
+	f_xml.write("\t</familias>\n")
+
 	f_xml.write("</genoa>\n")
 
 	print(success_msg)
