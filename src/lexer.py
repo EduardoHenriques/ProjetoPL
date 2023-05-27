@@ -12,37 +12,39 @@ dic = dict()  # dicionario que associa o pointer ao nome da pessoa
 
 
 def t_error(t):
-	#print("erro" + t.value)
-	t.lexer.skip(1)
+    #print("erro" + t.value)
+    t.lexer.skip(1)
+
 
 
 #    states = [
-#    	 ("pessoa", "exclusive"),
-#    	 ("familia", "exclusive")
+#         ("pessoa", "exclusive"),
+#         ("familia", "exclusive")
 #    ]
 #
 tokens = [
 
-	"LEVEL",
+    "LEVEL",
 
-	"BIRTH",
-	"DEATH",
-	"MAR",  # casamento
-	"BURIAL",
+    "BIRTH",
+    "DEATH",
+    "MAR",  # casamento
+    "BURIAL",
 
-	"POINTER",
+    "POINTER",
 
-	"CONTENT",
+    "CONTENT",
+    "MULTITAG",
 
-	"CONT",
-	"CHAN",
-	"FAM",
-	"INDI",
-	"CHR",
-	"GEDC",
-	"BEGIN",
-	"START_FILE",
-	"END_FILE"
+    "CONT",
+    "CHAN",
+    "FAM",
+    "INDI",
+    "CHR",
+    "GEDC",
+    "BEGIN",
+    "START_FILE",
+    "END_FILE"
 ]
 
 # expressoes tokens e estados
@@ -59,11 +61,9 @@ t_ANY_BURIAL = r"BURI"
 t_ANY_MAR = r"MARR"
 t_ANY_GEDC = r"GEDC"
 t_CHAN = r"CHAN"
-t_FAM = r"FAM\b"
 
 t_CONT = r"CONT"
 
-t_ANY_INDI = r"INDI"
 
 
 t_START_FILE = r"0\ HEAD"
@@ -74,8 +74,23 @@ t_LEVEL = r"\d"
 
 
 def t_CONTENT(t):
-	r"""(_?[A-Z]{3,15}|@[^IF][^@\n]+?@)[\ \t]([^\n]+)"""
-	return t
+    r"""(_?[A-Z]{3,15}|@[^IF][^@\n]+?@)[\ \t]([^\n]+)"""
+    return t
+
+
+def t_ANY_INDI(t):
+    r"INDI"
+    return t
+
+
+def t_FAM(t):
+    r"FAM\b"
+    return t
+
+
+def t_MULTITAG(t):
+    r'[A-Z]{3,15}(?=\n)'
+    return t
 
 
 t_ANY_POINTER = r"\@[IF][^@]+?\@"
@@ -85,9 +100,9 @@ lexer = lex.lex()
 
 if __name__ == "__main__":
 
-	with open("test/sintaxe.txt", 'r') as f:
-		lines = f.readlines()
-		for line in lines:
-			lexer.input(line)
-			for token in lexer:
-				print(f"{token.type:<10} | {token.value:<50}")
+    with open("test/familias_reais.ged.txt", 'r') as f:
+        lines = f.readlines()
+        for line in lines:
+            lexer.input(line)
+            for token in lexer:
+                print(f"{token.type:<10} | {token.value:<50}")

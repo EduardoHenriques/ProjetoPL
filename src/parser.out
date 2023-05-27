@@ -7,14 +7,14 @@ Rule 1     gedcom -> START_FILE header BEGIN people families
 Rule 2     header -> header LEVEL restHeader
 Rule 3     header -> LEVEL restHeader
 Rule 4     restHeader -> CONTENT
-Rule 5     restHeader -> multTag
+Rule 5     restHeader -> MULTITAG
 Rule 6     people -> people person
 Rule 7     people -> person
 Rule 8     person -> LEVEL POINTER INDI conteudo BEGIN
 Rule 9     conteudo -> conteudo LEVEL restPerson
 Rule 10    conteudo -> LEVEL restPerson
 Rule 11    restPerson -> CONTENT
-Rule 12    restPerson -> multTag
+Rule 12    restPerson -> MULTITAG
 Rule 13    families -> families family
 Rule 14    families -> family
 Rule 15    family -> LEVEL POINTER FAM conteudoF BEGIN
@@ -24,7 +24,7 @@ Rule 18    family -> LEVEL POINTER FAM END_FILE
 Rule 19    conteudoF -> conteudoF LEVEL restFams
 Rule 20    conteudoF -> LEVEL restFams
 Rule 21    restFams -> CONTENT
-Rule 22    restFams -> multTag
+Rule 22    restFams -> MULTITAG
 Rule 23    multTag -> BIRTH
 Rule 24    multTag -> CHAN
 Rule 25    multTag -> DEATH
@@ -50,6 +50,7 @@ GEDC                 : 29
 INDI                 : 8
 LEVEL                : 2 3 8 9 10 15 16 17 18 19 20
 MAR                  : 28
+MULTITAG             : 5 12 22
 POINTER              : 8 15 16 17 18
 START_FILE           : 1
 error                : 
@@ -62,7 +63,7 @@ families             : 1 13
 family               : 13 14
 gedcom               : 0
 header               : 1 2
-multTag              : 5 12 22
+multTag              : 
 people               : 1 6
 person               : 6 7
 restFams             : 19 20
@@ -109,28 +110,12 @@ state 4
 
     (3) header -> LEVEL . restHeader
     (4) restHeader -> . CONTENT
-    (5) restHeader -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (5) restHeader -> . MULTITAG
 
     CONTENT         shift and go to state 8
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    MULTITAG        shift and go to state 9
 
     restHeader                     shift and go to state 7
-    multTag                        shift and go to state 9
 
 state 5
 
@@ -139,37 +124,21 @@ state 5
     (7) people -> . person
     (8) person -> . LEVEL POINTER INDI conteudo BEGIN
 
-    LEVEL           shift and go to state 20
+    LEVEL           shift and go to state 12
 
-    people                         shift and go to state 18
-    person                         shift and go to state 19
+    people                         shift and go to state 10
+    person                         shift and go to state 11
 
 state 6
 
     (2) header -> header LEVEL . restHeader
     (4) restHeader -> . CONTENT
-    (5) restHeader -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (5) restHeader -> . MULTITAG
 
     CONTENT         shift and go to state 8
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    MULTITAG        shift and go to state 9
 
-    restHeader                     shift and go to state 21
-    multTag                        shift and go to state 9
+    restHeader                     shift and go to state 13
 
 state 7
 
@@ -189,85 +158,13 @@ state 8
 
 state 9
 
-    (5) restHeader -> multTag .
+    (5) restHeader -> MULTITAG .
 
-    BEGIN           reduce using rule 5 (restHeader -> multTag .)
-    LEVEL           reduce using rule 5 (restHeader -> multTag .)
+    BEGIN           reduce using rule 5 (restHeader -> MULTITAG .)
+    LEVEL           reduce using rule 5 (restHeader -> MULTITAG .)
 
 
 state 10
-
-    (23) multTag -> BIRTH .
-
-    BEGIN           reduce using rule 23 (multTag -> BIRTH .)
-    LEVEL           reduce using rule 23 (multTag -> BIRTH .)
-    END_FILE        reduce using rule 23 (multTag -> BIRTH .)
-
-
-state 11
-
-    (24) multTag -> CHAN .
-
-    BEGIN           reduce using rule 24 (multTag -> CHAN .)
-    LEVEL           reduce using rule 24 (multTag -> CHAN .)
-    END_FILE        reduce using rule 24 (multTag -> CHAN .)
-
-
-state 12
-
-    (25) multTag -> DEATH .
-
-    BEGIN           reduce using rule 25 (multTag -> DEATH .)
-    LEVEL           reduce using rule 25 (multTag -> DEATH .)
-    END_FILE        reduce using rule 25 (multTag -> DEATH .)
-
-
-state 13
-
-    (26) multTag -> CHR .
-
-    BEGIN           reduce using rule 26 (multTag -> CHR .)
-    LEVEL           reduce using rule 26 (multTag -> CHR .)
-    END_FILE        reduce using rule 26 (multTag -> CHR .)
-
-
-state 14
-
-    (27) multTag -> BURIAL .
-
-    BEGIN           reduce using rule 27 (multTag -> BURIAL .)
-    LEVEL           reduce using rule 27 (multTag -> BURIAL .)
-    END_FILE        reduce using rule 27 (multTag -> BURIAL .)
-
-
-state 15
-
-    (28) multTag -> MAR .
-
-    BEGIN           reduce using rule 28 (multTag -> MAR .)
-    LEVEL           reduce using rule 28 (multTag -> MAR .)
-    END_FILE        reduce using rule 28 (multTag -> MAR .)
-
-
-state 16
-
-    (29) multTag -> GEDC .
-
-    BEGIN           reduce using rule 29 (multTag -> GEDC .)
-    LEVEL           reduce using rule 29 (multTag -> GEDC .)
-    END_FILE        reduce using rule 29 (multTag -> GEDC .)
-
-
-state 17
-
-    (30) multTag -> CONT .
-
-    BEGIN           reduce using rule 30 (multTag -> CONT .)
-    LEVEL           reduce using rule 30 (multTag -> CONT .)
-    END_FILE        reduce using rule 30 (multTag -> CONT .)
-
-
-state 18
 
     (1) gedcom -> START_FILE header BEGIN people . families
     (6) people -> people . person
@@ -279,27 +176,27 @@ state 18
     (17) family -> . LEVEL POINTER FAM BEGIN
     (18) family -> . LEVEL POINTER FAM END_FILE
 
-    LEVEL           shift and go to state 25
+    LEVEL           shift and go to state 17
 
-    families                       shift and go to state 22
-    person                         shift and go to state 23
-    family                         shift and go to state 24
+    families                       shift and go to state 14
+    person                         shift and go to state 15
+    family                         shift and go to state 16
 
-state 19
+state 11
 
     (7) people -> person .
 
     LEVEL           reduce using rule 7 (people -> person .)
 
 
-state 20
+state 12
 
     (8) person -> LEVEL . POINTER INDI conteudo BEGIN
 
-    POINTER         shift and go to state 26
+    POINTER         shift and go to state 18
 
 
-state 21
+state 13
 
     (2) header -> header LEVEL restHeader .
 
@@ -307,7 +204,7 @@ state 21
     LEVEL           reduce using rule 2 (header -> header LEVEL restHeader .)
 
 
-state 22
+state 14
 
     (1) gedcom -> START_FILE header BEGIN people families .
     (13) families -> families . family
@@ -317,18 +214,18 @@ state 22
     (18) family -> . LEVEL POINTER FAM END_FILE
 
     $end            reduce using rule 1 (gedcom -> START_FILE header BEGIN people families .)
-    LEVEL           shift and go to state 28
+    LEVEL           shift and go to state 20
 
-    family                         shift and go to state 27
+    family                         shift and go to state 19
 
-state 23
+state 15
 
     (6) people -> people person .
 
     LEVEL           reduce using rule 6 (people -> people person .)
 
 
-state 24
+state 16
 
     (14) families -> family .
 
@@ -336,7 +233,7 @@ state 24
     $end            reduce using rule 14 (families -> family .)
 
 
-state 25
+state 17
 
     (8) person -> LEVEL . POINTER INDI conteudo BEGIN
     (15) family -> LEVEL . POINTER FAM conteudoF BEGIN
@@ -344,17 +241,17 @@ state 25
     (17) family -> LEVEL . POINTER FAM BEGIN
     (18) family -> LEVEL . POINTER FAM END_FILE
 
-    POINTER         shift and go to state 29
+    POINTER         shift and go to state 21
 
 
-state 26
+state 18
 
     (8) person -> LEVEL POINTER . INDI conteudo BEGIN
 
-    INDI            shift and go to state 30
+    INDI            shift and go to state 22
 
 
-state 27
+state 19
 
     (13) families -> families family .
 
@@ -362,17 +259,17 @@ state 27
     $end            reduce using rule 13 (families -> families family .)
 
 
-state 28
+state 20
 
     (15) family -> LEVEL . POINTER FAM conteudoF BEGIN
     (16) family -> LEVEL . POINTER FAM conteudoF END_FILE
     (17) family -> LEVEL . POINTER FAM BEGIN
     (18) family -> LEVEL . POINTER FAM END_FILE
 
-    POINTER         shift and go to state 31
+    POINTER         shift and go to state 23
 
 
-state 29
+state 21
 
     (8) person -> LEVEL POINTER . INDI conteudo BEGIN
     (15) family -> LEVEL POINTER . FAM conteudoF BEGIN
@@ -380,31 +277,31 @@ state 29
     (17) family -> LEVEL POINTER . FAM BEGIN
     (18) family -> LEVEL POINTER . FAM END_FILE
 
-    INDI            shift and go to state 30
-    FAM             shift and go to state 32
+    INDI            shift and go to state 22
+    FAM             shift and go to state 24
 
 
-state 30
+state 22
 
     (8) person -> LEVEL POINTER INDI . conteudo BEGIN
     (9) conteudo -> . conteudo LEVEL restPerson
     (10) conteudo -> . LEVEL restPerson
 
-    LEVEL           shift and go to state 33
+    LEVEL           shift and go to state 25
 
-    conteudo                       shift and go to state 34
+    conteudo                       shift and go to state 26
 
-state 31
+state 23
 
     (15) family -> LEVEL POINTER . FAM conteudoF BEGIN
     (16) family -> LEVEL POINTER . FAM conteudoF END_FILE
     (17) family -> LEVEL POINTER . FAM BEGIN
     (18) family -> LEVEL POINTER . FAM END_FILE
 
-    FAM             shift and go to state 32
+    FAM             shift and go to state 24
 
 
-state 32
+state 24
 
     (15) family -> LEVEL POINTER FAM . conteudoF BEGIN
     (16) family -> LEVEL POINTER FAM . conteudoF END_FILE
@@ -413,87 +310,55 @@ state 32
     (19) conteudoF -> . conteudoF LEVEL restFams
     (20) conteudoF -> . LEVEL restFams
 
-    BEGIN           shift and go to state 37
-    END_FILE        shift and go to state 38
-    LEVEL           shift and go to state 35
+    BEGIN           shift and go to state 29
+    END_FILE        shift and go to state 30
+    LEVEL           shift and go to state 27
 
-    conteudoF                      shift and go to state 36
+    conteudoF                      shift and go to state 28
 
-state 33
+state 25
 
     (10) conteudo -> LEVEL . restPerson
     (11) restPerson -> . CONTENT
-    (12) restPerson -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (12) restPerson -> . MULTITAG
 
-    CONTENT         shift and go to state 40
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    CONTENT         shift and go to state 32
+    MULTITAG        shift and go to state 33
 
-    restPerson                     shift and go to state 39
-    multTag                        shift and go to state 41
+    restPerson                     shift and go to state 31
 
-state 34
+state 26
 
     (8) person -> LEVEL POINTER INDI conteudo . BEGIN
     (9) conteudo -> conteudo . LEVEL restPerson
 
-    BEGIN           shift and go to state 43
-    LEVEL           shift and go to state 42
+    BEGIN           shift and go to state 35
+    LEVEL           shift and go to state 34
 
 
-state 35
+state 27
 
     (20) conteudoF -> LEVEL . restFams
     (21) restFams -> . CONTENT
-    (22) restFams -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (22) restFams -> . MULTITAG
 
-    CONTENT         shift and go to state 45
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    CONTENT         shift and go to state 37
+    MULTITAG        shift and go to state 38
 
-    restFams                       shift and go to state 44
-    multTag                        shift and go to state 46
+    restFams                       shift and go to state 36
 
-state 36
+state 28
 
     (15) family -> LEVEL POINTER FAM conteudoF . BEGIN
     (16) family -> LEVEL POINTER FAM conteudoF . END_FILE
     (19) conteudoF -> conteudoF . LEVEL restFams
 
-    BEGIN           shift and go to state 48
-    END_FILE        shift and go to state 49
-    LEVEL           shift and go to state 47
+    BEGIN           shift and go to state 40
+    END_FILE        shift and go to state 41
+    LEVEL           shift and go to state 39
 
 
-state 37
+state 29
 
     (17) family -> LEVEL POINTER FAM BEGIN .
 
@@ -501,7 +366,7 @@ state 37
     $end            reduce using rule 17 (family -> LEVEL POINTER FAM BEGIN .)
 
 
-state 38
+state 30
 
     (18) family -> LEVEL POINTER FAM END_FILE .
 
@@ -509,7 +374,7 @@ state 38
     $end            reduce using rule 18 (family -> LEVEL POINTER FAM END_FILE .)
 
 
-state 39
+state 31
 
     (10) conteudo -> LEVEL restPerson .
 
@@ -517,7 +382,7 @@ state 39
     LEVEL           reduce using rule 10 (conteudo -> LEVEL restPerson .)
 
 
-state 40
+state 32
 
     (11) restPerson -> CONTENT .
 
@@ -525,49 +390,33 @@ state 40
     LEVEL           reduce using rule 11 (restPerson -> CONTENT .)
 
 
-state 41
+state 33
 
-    (12) restPerson -> multTag .
+    (12) restPerson -> MULTITAG .
 
-    BEGIN           reduce using rule 12 (restPerson -> multTag .)
-    LEVEL           reduce using rule 12 (restPerson -> multTag .)
+    BEGIN           reduce using rule 12 (restPerson -> MULTITAG .)
+    LEVEL           reduce using rule 12 (restPerson -> MULTITAG .)
 
 
-state 42
+state 34
 
     (9) conteudo -> conteudo LEVEL . restPerson
     (11) restPerson -> . CONTENT
-    (12) restPerson -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (12) restPerson -> . MULTITAG
 
-    CONTENT         shift and go to state 40
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    CONTENT         shift and go to state 32
+    MULTITAG        shift and go to state 33
 
-    restPerson                     shift and go to state 50
-    multTag                        shift and go to state 41
+    restPerson                     shift and go to state 42
 
-state 43
+state 35
 
     (8) person -> LEVEL POINTER INDI conteudo BEGIN .
 
     LEVEL           reduce using rule 8 (person -> LEVEL POINTER INDI conteudo BEGIN .)
 
 
-state 44
+state 36
 
     (20) conteudoF -> LEVEL restFams .
 
@@ -576,7 +425,7 @@ state 44
     LEVEL           reduce using rule 20 (conteudoF -> LEVEL restFams .)
 
 
-state 45
+state 37
 
     (21) restFams -> CONTENT .
 
@@ -585,43 +434,27 @@ state 45
     LEVEL           reduce using rule 21 (restFams -> CONTENT .)
 
 
-state 46
+state 38
 
-    (22) restFams -> multTag .
+    (22) restFams -> MULTITAG .
 
-    BEGIN           reduce using rule 22 (restFams -> multTag .)
-    END_FILE        reduce using rule 22 (restFams -> multTag .)
-    LEVEL           reduce using rule 22 (restFams -> multTag .)
+    BEGIN           reduce using rule 22 (restFams -> MULTITAG .)
+    END_FILE        reduce using rule 22 (restFams -> MULTITAG .)
+    LEVEL           reduce using rule 22 (restFams -> MULTITAG .)
 
 
-state 47
+state 39
 
     (19) conteudoF -> conteudoF LEVEL . restFams
     (21) restFams -> . CONTENT
-    (22) restFams -> . multTag
-    (23) multTag -> . BIRTH
-    (24) multTag -> . CHAN
-    (25) multTag -> . DEATH
-    (26) multTag -> . CHR
-    (27) multTag -> . BURIAL
-    (28) multTag -> . MAR
-    (29) multTag -> . GEDC
-    (30) multTag -> . CONT
+    (22) restFams -> . MULTITAG
 
-    CONTENT         shift and go to state 45
-    BIRTH           shift and go to state 10
-    CHAN            shift and go to state 11
-    DEATH           shift and go to state 12
-    CHR             shift and go to state 13
-    BURIAL          shift and go to state 14
-    MAR             shift and go to state 15
-    GEDC            shift and go to state 16
-    CONT            shift and go to state 17
+    CONTENT         shift and go to state 37
+    MULTITAG        shift and go to state 38
 
-    restFams                       shift and go to state 51
-    multTag                        shift and go to state 46
+    restFams                       shift and go to state 43
 
-state 48
+state 40
 
     (15) family -> LEVEL POINTER FAM conteudoF BEGIN .
 
@@ -629,7 +462,7 @@ state 48
     $end            reduce using rule 15 (family -> LEVEL POINTER FAM conteudoF BEGIN .)
 
 
-state 49
+state 41
 
     (16) family -> LEVEL POINTER FAM conteudoF END_FILE .
 
@@ -637,7 +470,7 @@ state 49
     $end            reduce using rule 16 (family -> LEVEL POINTER FAM conteudoF END_FILE .)
 
 
-state 50
+state 42
 
     (9) conteudo -> conteudo LEVEL restPerson .
 
@@ -645,7 +478,7 @@ state 50
     LEVEL           reduce using rule 9 (conteudo -> conteudo LEVEL restPerson .)
 
 
-state 51
+state 43
 
     (19) conteudoF -> conteudoF LEVEL restFams .
 

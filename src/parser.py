@@ -31,7 +31,7 @@ def p_header(p):
 
 def p_header_rest(p):
 	"""restHeader : CONTENT
-				  | multTag"""
+				  | MULTITAG"""
 
 
 def p_people(p):
@@ -97,8 +97,10 @@ def p_restPerson_single(p):
 
 
 def p_restPerson_mult(p):
-	"""restPerson	: multTag"""
-	p[0] = p[1]
+	"""restPerson    : MULTITAG"""
+	tag = muda_tag(p[1], None, pessoa_atual.currentLevel)
+	global tipo
+	tipo = tag
 
 
 # -------------------------------------------------- FAMILIA-------------------------------------------------------------
@@ -166,8 +168,10 @@ def p_restFams_single(p):
 
 
 def p_restFams_mult(p):
-	"""restFams	: multTag"""
-	p[0] = p[1]
+	"""restFams    : MULTITAG"""
+	tag = muda_tag(p[1], None, pessoa_atual.currentLevel)
+	global tipo
+	tipo = tag
 
 
 # -------------------------------------------------- TAGS-------------------------------------------------------------
