@@ -16,7 +16,6 @@ def t_error(t):
 	t.lexer.skip(1)
 
 
-
 #    states = [
 #    	 ("pessoa", "exclusive"),
 #    	 ("familia", "exclusive")

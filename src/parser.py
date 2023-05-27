@@ -79,7 +79,7 @@ def p_restPerson_single(p):
 
 	# nao escrevemos notas
 	if pessoa_atual is not None:
-		p[0] = '\t' + '<' + tag + '>' + cont + '</' + tag + '>'
+		p[0] = '\t' + '<' + tag + '>' + cont.replace("&", " and ") + '</' + tag + '>'
 		print(p[0] + "\n")
 		if tag == "FAMS":
 			pessoa_atual.add_fams(cont.strip())
