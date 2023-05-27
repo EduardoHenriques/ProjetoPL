@@ -49,9 +49,9 @@ def p_person_pointer_indi(p):
 	p[0] = "<ID>" + p[2] + "</ID>"
 	print(p[0] + "\n")
 
-	pessoa_atual.add_id(p[2])             # associar ID á pessoa
+	pessoa_atual.add_id(p[2])  # associar ID á pessoa
 	lista_pessoas[id_int] = pessoa_atual  # guardar pessoa no dicionario (ID->PESSOA)
-	pessoa_atual = Pessoa()               # dar reset a pessoal atual
+	pessoa_atual = Pessoa()  # dar reset a pessoal atual
 
 
 def p_conteudo_list(p):
@@ -74,7 +74,7 @@ def p_restPerson_single(p):
 	tag = muda_tag(tag, tipo, pessoa_atual.currentLevel)
 	cont = p[1].split(" ", 1)[1]
 
-	if tag == "Nome":        # tirar as barras ('/') do nome
+	if tag == "Nome":  # tirar as barras ('/') do nome
 		tag.replace('/', '')
 
 	# nao escrevemos notas
@@ -127,10 +127,12 @@ def p_conteudo_fam(p):
 	"""conteudoF		: conteudoF LEVEL restFams
 						| LEVEL restFams"""
 	global pessoa_atual
-	#if len(p) == 4:
-	#	pessoa_atual.currentLevel = int(p[2])
-	#else:
-	#	pessoa_atual.currentLevel = int(p[1])
+
+
+# if len(p) == 4:
+#	pessoa_atual.currentLevel = int(p[2])
+# else:
+#	pessoa_atual.currentLevel = int(p[1])
 
 
 def p_restFams_single(p):
@@ -221,8 +223,6 @@ def p_multTag_cont(p):
 	"""multTag  : CONT"""
 
 
-
-
 def p_error(p):
 	print(p)
 	p.success = False
@@ -248,14 +248,15 @@ Selecione a opção:
 2 => FAMÍLIAS ROMANAS                           
 3 => FAMÍLIAS GREGAS                           
 4 => FAMÍLIAS REAIS
+5 => CUSTOM FILE
                         
-5 => SAIR
+6 => SAIR
 '''
 
 	errorMsg = '''
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%           OPCAO INVALIDA!!!       %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           OPCAO/FICHEIRO INVALIDO(A)!!!       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 '''
 
 	opt = None
@@ -272,6 +273,13 @@ Selecione a opção:
 			case "4":
 				parse("test/familias_reais.ged.txt", "output/output_Reais.xml", opt)
 			case "5":
+				custom_path = input(
+					"DIGITE O NOME DO FICHEIRO(TEM DE ESTAR NA DIRETORIA TEST!!!) [exemplo: {file_name}.ged.txt]:")
+				if os.path.exists("test/" + custom_path):
+					parse("test/" + custom_path, "output/" + custom_path.replace("ged.txt", "xml"), opt)
+				else:
+					print(errorMsg)
+			case "6":
 				print("TERM...")
 				exit()
 			case _:
@@ -280,7 +288,6 @@ Selecione a opção:
 
 
 def parse(gedcom_path, output_path, opt):
-
 	success_msg = f'''
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   OPCAO  {opt} EFETUADA COM SUCESSO     %
@@ -310,7 +317,3 @@ def parse(gedcom_path, output_path, opt):
 	f_xml.write("</genoa>\n")
 
 	print(success_msg)
-
-
-if __name__ == "__main__":
-	gedcomToXML()
