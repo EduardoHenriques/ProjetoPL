@@ -13,4 +13,4 @@ Grupo nº 29
 
 ### Enunciado escolhido
 
-Enunciado nº 2.7 : Conversor de GEDCOM
+Enunciado nº 2.7 : Conversor de GEDCOM->XML
